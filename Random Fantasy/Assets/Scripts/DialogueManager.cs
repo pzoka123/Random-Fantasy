@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public GameObject[] cards;
+
     public Text nameText;
     public Text dialogueText;
+
+    public Animator anim;
 
     Queue<string> sentences;
 
@@ -24,11 +28,25 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        for (int i = 0; i < cards.Length; i++)
+        {
+            if (cards[i].GetComponent<DialogueTrigger>().isClicked == false)
+            {
+                cards[i].SetActive(false);
+            }
+            else
+            {
+                cards[i].GetComponent<Animator>().SetTrigger("isClicked");
+            }
+        }
+
+        anim.SetBool("isActive", true);
+
         nameText.text = dialogue.name;
 
         sentences.Clear();
 
-        foreach(string sentence in sentences)
+        foreach(string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }
@@ -37,7 +55,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        Debug.Log("End of convo");
+        anim.SetBool("isActive", false);
     }
 
     public void DisplayNextSentence()
