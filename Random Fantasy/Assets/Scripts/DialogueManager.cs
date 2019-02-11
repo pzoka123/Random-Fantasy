@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public GameObject[] cards;
+    GameObject currCard;
 
     public Text nameText;
     public Text dialogueText;
@@ -36,7 +37,8 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                cards[i].GetComponent<Animator>().SetTrigger("isClicked");
+                cards[i].GetComponent<Animator>().SetBool("isOpen", true);
+                currCard = cards[i];
             }
         }
 
@@ -56,6 +58,23 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue()
     {
         anim.SetBool("isActive", false);
+        if (currCard.tag == "EventCard")
+        {
+            for (int i = 0; i < cards.Length; i++)
+            {
+                cards[i].GetComponent<DialogueTrigger>().isClicked = false;
+                cards[i].GetComponent<Animator>().SetBool("isOpen", false);
+                cards[i].SetActive(true);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < cards.Length; i++)
+            {
+                cards[i].GetComponent<DialogueTrigger>().isClicked = false;
+                cards[i].SetActive(false);
+            }
+        }
     }
 
     public void DisplayNextSentence()
