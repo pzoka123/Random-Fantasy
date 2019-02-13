@@ -5,97 +5,81 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public GameObject[] cards;
-    GameObject currCard;
-
+    Master gameManager;
+    DiceScript diceScript;
     public Text nameText;
     public Text dialogueText;
+    public Animator dialogueAnim;
 
-    public Animator anim;
-
-    Queue<string> sentences;
+    public GameObject currCard;
+    public GameObject[] cards;
 
     // Start is called before the first frame update
     void Start()
     {
-        sentences = new Queue<string>();
+        gameManager = GameObject.FindObjectOfType<Master>();
+        diceScript = GameObject.FindObjectOfType<DiceScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-
-    public void StartDialogue(Dialogue dialogue)
-    {
-        for (int i = 0; i < cards.Length; i++)
-        {
-            if (cards[i].GetComponent<DialogueTrigger>().isClicked == false)
-            {
-                cards[i].SetActive(false);
-            }
-            else
-            {
-                cards[i].GetComponent<Animator>().SetBool("isOpen", true);
-                currCard = cards[i];
-            }
-        }
-
-        anim.SetBool("isActive", true);
-
-        nameText.text = dialogue.name;
-
-        sentences.Clear();
-
-        foreach(string sentence in dialogue.sentences)
-        {
-            sentences.Enqueue(sentence);
-        }
-        DisplayNextSentence();
-    }
-
-    void EndDialogue()
-    {
-        anim.SetBool("isActive", false);
-        if (currCard.tag == "EventCard")
-        {
-            for (int i = 0; i < cards.Length; i++)
-            {
-                cards[i].GetComponent<DialogueTrigger>().isClicked = false;
-                cards[i].GetComponent<Animator>().SetBool("isOpen", false);
-                cards[i].SetActive(true);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < cards.Length; i++)
-            {
-                cards[i].GetComponent<DialogueTrigger>().isClicked = false;
-                cards[i].SetActive(false);
-            }
-        }
-    }
-
+    
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
+        if (currCard.GetComponent<Dialogue>().sentencesQueue.Count == 0)
         {
-            EndDialogue();
+            currCard.GetComponent<Dialogue>().EndDialogue();
+            dialogueAnim.SetBool("isActive", false);
+            if (currCard.GetComponent<Dialogue>().key == "Fighting")
+            {
+                gameManager.DiceBoardDisplay();
+                diceScript.Setup();
+            }
             return;
         }
-        string sentence = sentences.Dequeue();
+        string sentence = currCard.GetComponent<Dialogue>().sentencesQueue.Dequeue();
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+        StartCoroutine(TypeSentence(sentence, dialogueText));
     }
-
-    IEnumerator TypeSentence (string sentence)
+    
+    IEnumerator TypeSentence(string sentence, Text dialogueT)
     {
-        dialogueText.text = "";
+        dialogueT.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            dialogueText.text += letter;
+            dialogueT.text += letter;
             yield return null;
+        }
+    }
+
+    public void DialogDisplay(string name)
+    {
+        if (name == "")
+            nameText.rectTransform.parent.gameObject.SetActive(false);
+        else
+        {
+            nameText.rectTransform.parent.gameObject.SetActive(true);
+            nameText.text = name;
+        }
+        dialogueAnim.SetBool("isActive", true);
+
+        foreach(GameObject card in cards)
+        {
+            if (card != currCard)
+            {
+                card.SetActive(false);
+            }
+        }
+    }
+
+    public void DialogReturn()
+    {
+        foreach (GameObject card in cards)
+        {
+            card.SetActive(true);
         }
     }
 }
