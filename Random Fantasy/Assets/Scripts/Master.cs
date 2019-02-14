@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Master : MonoBehaviour
 {
@@ -8,11 +9,16 @@ public class Master : MonoBehaviour
 
     public int dice = 2;
     public bool fight = false;
+    public bool sleep = false;
+    public bool dead = false;
     public bool callOnce = true;
     public bool diceBoard = false;
     public Dialogue dialogue;
 
     public Animator animDiceBoard;
+
+    public Image dark;
+    float lerpValue = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +33,21 @@ public class Master : MonoBehaviour
         {
             Fight();
             callOnce = false;
+        }
+        if (sleep == true)
+        {
+            dark.gameObject.SetActive(true);
+            Sleep();
+            if (dark.color.a == 1)
+            {
+                dead = true;
+                sleep = false;
+            }
+        }
+        if (dead == true)
+        {
+            Dead();
+            dead = false;
         }
     }
 
@@ -45,5 +66,23 @@ public class Master : MonoBehaviour
     public void DiceBoardDisplay()
     {
         animDiceBoard.SetBool("isActive", true);
+    }
+
+    void Sleep()
+    {
+        lerpValue += Time.deltaTime * 1.0f;
+        dark.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, lerpValue));
+    }
+
+    void Dead()
+    {
+        dialogue.dialogName = "";
+        dialogue.sentences = new string[3];
+        dialogue.sentences[0] = "As soon as you fall asleep, a group of bandits appears. It seems they have been following you for a while.";
+        dialogue.sentences[1] = "They killed you in your sleep, robbing you off your weapons and golden armor.";
+        dialogue.sentences[2] = "You died a pitiful death...";
+        dialogue.key = "";
+        dialogueManager.currCard = dialogue.gameObject;
+        dialogue.StartDialogue();
     }
 }

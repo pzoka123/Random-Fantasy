@@ -69,6 +69,15 @@ public class Dialogue : MonoBehaviour
             {
                 gameManager.fight = true;
             }
+            else if (gameObject.tag == "Blessed")
+            {
+                gameManager.dice += 1;
+                gameManager.fight = true;
+            }
+            else if (gameObject.tag == "Sleep")
+            {
+                gameManager.sleep = true;
+            }
         }
         else
         {

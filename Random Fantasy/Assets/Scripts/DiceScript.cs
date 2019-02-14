@@ -7,6 +7,9 @@ public class DiceScript : MonoBehaviour
 {
     Master gameManager;
     public Sprite[] diceSprites;
+    public GameObject rollText;
+
+    int rollNum;
 
     GameObject[] activeDice;
 
@@ -34,11 +37,29 @@ public class DiceScript : MonoBehaviour
 
     public void Roll()
     {
+        rollNum = 0;
         foreach (GameObject die in activeDice)
         {
             int rnd = Random.Range(1, 7);
-            Debug.Log("random num: " + rnd);
+            rollNum += rnd;
             die.GetComponent<Image>().sprite = diceSprites[rnd-1];
         }
+        Result();
+    }
+
+    public void Result()
+    {
+        string isHit;
+        if (rollNum <= 6)
+        {
+            isHit = "It's a miss.";
+        }
+        else
+        {
+            isHit = "It's a hit.";
+        }
+        rollText.GetComponent<Text>().text = rollNum.ToString() + ". " + isHit;
+        rollText.SetActive(true);
+        gameObject.SetActive(false);
     }
 }
