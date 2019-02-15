@@ -8,6 +8,7 @@ public class DiceScript : MonoBehaviour
     Master gameManager;
     public Sprite[] diceSprites;
     public GameObject rollText;
+    public GameObject rollButton;
 
     int rollNum;
 
@@ -50,7 +51,7 @@ public class DiceScript : MonoBehaviour
     public void Result()
     {
         string isHit;
-        if (rollNum <= 6)
+        if (rollNum <= 7)
         {
             isHit = "It's a miss.";
         }
@@ -60,6 +61,6 @@ public class DiceScript : MonoBehaviour
         }
         rollText.GetComponent<Text>().text = rollNum.ToString() + ". " + isHit;
         rollText.SetActive(true);
-        gameObject.SetActive(false);
+        rollButton.SetActive(false);
     }
 }

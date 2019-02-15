@@ -203,7 +203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &120293950
 RectTransform:
   m_ObjectHideFlags: 0
@@ -470,7 +470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &379105184
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2341,7 +2341,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 47b47a9e4ed78f04ab55feb00be5785b, type: 3}
   - {fileID: 21300000, guid: 7f16951542179fa42b2b625e1ab20d87, type: 3}
   - {fileID: 21300000, guid: 5c56c1e1166c95a45b1b9d19d4074c42, type: 3}
-  rollText: {fileID: 0}
+  rollText: {fileID: 120293949}
+  rollButton: {fileID: 379105183}
 --- !u!95 &1690955178
 Animator:
   serializedVersion: 3
