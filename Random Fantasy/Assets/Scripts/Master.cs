@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class Master : MonoBehaviour
 {
     public DialogueManager dialogueManager;
+    DiceScript diceManager;
 
     public int dice = 2;
     public bool fight = false;
     public bool sleep = false;
     public bool dead = false;
     public bool callOnce = true;
-    public bool diceBoard = false;
+    public bool callOnce2 = true;
     public Dialogue dialogue;
 
     public Animator animDiceBoard;
@@ -23,7 +24,7 @@ public class Master : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        diceManager = GameObject.FindObjectOfType<DiceScript>();
     }
 
     // Update is called once per frame
@@ -49,6 +50,16 @@ public class Master : MonoBehaviour
             Dead();
             dead = false;
         }
+        if (diceManager.endFight == 1 && callOnce2)
+        {
+            AfterWin();
+            callOnce2 = false;
+        }
+        else if (diceManager.endFight == 2 && callOnce2)
+        {
+            AfterLose();
+            callOnce2 = false;
+        }
     }
 
     void Fight()
@@ -68,6 +79,11 @@ public class Master : MonoBehaviour
         animDiceBoard.SetBool("isActive", true);
     }
 
+    public void DiceBoardHide()
+    {
+        animDiceBoard.SetBool("isActive", false);
+    }
+
     void Sleep()
     {
         lerpValue += Time.deltaTime * 1.0f;
@@ -81,6 +97,29 @@ public class Master : MonoBehaviour
         dialogue.sentences[0] = "As soon as you fall asleep, a group of bandits appears. It seems they have been following you for a while.";
         dialogue.sentences[1] = "They killed you in your sleep, robbing you off your weapons and golden armor.";
         dialogue.sentences[2] = "You died a pitiful death...";
+        dialogue.key = "";
+        dialogueManager.currCard = dialogue.gameObject;
+        dialogue.StartDialogue();
+    }
+
+    void AfterWin()
+    {
+        dialogue.dialogName = "Golden Knight";
+        dialogue.sentences = new string[3];
+        dialogue.sentences[0] = "Who the hell is this guy? I don't think I have ever met him before.";
+        dialogue.sentences[1] = "And he is so weak.";
+        dialogue.sentences[2] = "Must be some rookie from another place. Not that I really care though.";
+        dialogue.key = "";
+        dialogueManager.currCard = dialogue.gameObject;
+        dialogue.StartDialogue();
+    }
+
+    void AfterLose()
+    {
+        dialogue.dialogName = "";
+        dialogue.sentences = new string[2];
+        dialogue.sentences[0] = "Because you are too weak, you died by the spear of the mysterious knight.";
+        dialogue.sentences[1] = "Try to become stronger in your next life.";
         dialogue.key = "";
         dialogueManager.currCard = dialogue.gameObject;
         dialogue.StartDialogue();

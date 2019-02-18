@@ -129,7 +129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3754122
 RectTransform:
   m_ObjectHideFlags: 0
@@ -146,7 +146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -100, y: -50}
+  m_AnchoredPosition: {x: -150, y: -20}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &3754123
@@ -275,8 +275,8 @@ GameObject:
   m_Component:
   - component: {fileID: 164366771}
   - component: {fileID: 164366770}
-  - component: {fileID: 164366769}
   - component: {fileID: 164366772}
+  - component: {fileID: 164366769}
   m_Layer: 0
   m_Name: Knight_2
   m_TagString: Untagged
@@ -359,7 +359,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164366768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.22, y: -1.25, z: 0}
+  m_LocalPosition: {x: 12.22, y: -1.25, z: 96}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -488,7 +488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 35}
+  m_AnchoredPosition: {x: 0, y: 20}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &379105185
@@ -652,7 +652,7 @@ MonoBehaviour:
   sleep: 0
   dead: 0
   callOnce: 1
-  diceBoard: 0
+  callOnce2: 1
   dialogue: {fileID: 948745726}
   animDiceBoard: {fileID: 1690955178}
   dark: {fileID: 1007586763}
@@ -1087,7 +1087,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -200}
+  m_AnchoredPosition: {x: 150, y: -20}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &816287497
@@ -1588,6 +1588,7 @@ GameObject:
   - component: {fileID: 1118277483}
   - component: {fileID: 1118277482}
   - component: {fileID: 1118277481}
+  - component: {fileID: 1118277484}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -1676,6 +1677,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1118277484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118277480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b93d0c135a5f75428de4cae99d331bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1310218765
 GameObject:
   m_ObjectHideFlags: 0
@@ -2283,7 +2296,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 498}
-  m_SizeDelta: {x: 400, y: 400}
+  m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1690955175
 MonoBehaviour:
@@ -2343,6 +2356,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5c56c1e1166c95a45b1b9d19d4074c42, type: 3}
   rollText: {fileID: 120293949}
   rollButton: {fileID: 379105183}
+  canAtk: 0
+  canDie: 0
+  endFight: 0
 --- !u!95 &1690955178
 Animator:
   serializedVersion: 3
@@ -2875,7 +2891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2143226301
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2892,7 +2908,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 100, y: -50}
+  m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2143226302

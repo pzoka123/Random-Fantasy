@@ -11,6 +11,11 @@ public class DiceScript : MonoBehaviour
     public GameObject rollButton;
 
     int rollNum;
+    public bool canAtk = false;
+    public bool canDie = false;
+    public bool canAtk2 = false;
+    public bool canDie2 = false;
+    public int endFight = 0;
 
     GameObject[] activeDice;
 
@@ -54,10 +59,14 @@ public class DiceScript : MonoBehaviour
         if (rollNum <= 7)
         {
             isHit = "It's a miss.";
+            canAtk = false;
+            canAtk2 = true;
         }
         else
         {
             isHit = "It's a hit.";
+            canAtk = true;
+            canAtk2 = false;
         }
         rollText.GetComponent<Text>().text = rollNum.ToString() + ". " + isHit;
         rollText.SetActive(true);
