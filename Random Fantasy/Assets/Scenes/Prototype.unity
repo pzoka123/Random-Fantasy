@@ -593,6 +593,7 @@ GameObject:
   - component: {fileID: 451861595}
   - component: {fileID: 451861593}
   - component: {fileID: 451861596}
+  - component: {fileID: 451861597}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -655,6 +656,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 308815cd6bc47f344b3582ce4389c591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &451861597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451861592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222c4183fc1b7874980bc43fa59a6b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &666150257
@@ -1628,6 +1641,7 @@ GameObject:
   - component: {fileID: 1310218769}
   - component: {fileID: 1310218768}
   - component: {fileID: 1310218771}
+  - component: {fileID: 1310218767}
   m_Layer: 5
   m_Name: BlueCard
   m_TagString: ChoiceCard
@@ -1655,6 +1669,18 @@ RectTransform:
   m_AnchoredPosition: {x: 350, y: -100}
   m_SizeDelta: {x: 140, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1310218767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310218765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce4961d33fdf5c74d8ffff795b38f53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1310218768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1695,8 +1721,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: StartDialogue
+      - m_Target: {fileID: 1310218767}
+        m_MethodName: Clicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

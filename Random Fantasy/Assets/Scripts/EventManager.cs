@@ -18,7 +18,7 @@ public class EventManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     public void Display()
     {
         GameObject.FindGameObjectWithTag("EventCard").SetActive(true);
@@ -35,5 +35,10 @@ public class EventManager : MonoBehaviour
         {
             card.SetActive(false);
         }
+    }
+
+    public void HideEvent()
+    {
+        GameObject.FindGameObjectWithTag("EventCard").GetComponent<Animator>().SetBool("isActive", false);
     }
 }

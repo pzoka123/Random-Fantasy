@@ -12,6 +12,8 @@ public class Choice : MonoBehaviour
     
     public void Clicked()
     {
-        DialogueManager.dialogueManager.Display();
+        gameObject.GetComponent<Animator>().SetBool("isActive", true);
+        GameLoop.gameLoop.textFile = Resources.Load("Texts/Sleep") as TextAsset;
+        GameLoop.gameLoop.dialogueStart = true;
     }
 }

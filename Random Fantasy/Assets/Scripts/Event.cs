@@ -17,14 +17,6 @@ public class Event : MonoBehaviour
     {
         choices = GameObject.FindGameObjectsWithTag("ChoiceCard");
     }
-    
-    void Update()
-    {
-        if (GameLoop.gameLoop.dialogueEnd)
-        {
-            gameObject.GetComponent<Animator>().SetBool("isActive", false);
-        }
-    }
 
     public void Clicked()
     {

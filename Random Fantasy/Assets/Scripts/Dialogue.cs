@@ -29,12 +29,10 @@ public class Dialogue : MonoBehaviour
                 if (lines[j][0] == '1')
                 {
                     tempPart.dialogName = lines[j].Substring(1, lines[j].Length - 1);
-                    //dialogues[count, 0] = lines[j].Substring(1, lines[j].Length - 1);
                 }
                 else if (lines[j][0] == '2')
                 {
                     tempPart.dialogSentence += "_" + lines[j].Substring(1, lines[j].Length - 1);
-                    //dialogues[count, 1] += "_" + lines[j].Substring(1, lines[j].Length - 1);
                 }
             }
             dialogues.Add(tempPart);

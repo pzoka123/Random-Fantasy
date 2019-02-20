@@ -15,6 +15,9 @@ public class DialogueManager : MonoBehaviour
     string dialogName;
     Queue<string> sentences = new Queue<string>();
 
+    GameObject nameBox;
+    GameObject dialogBox;
+
     void Awake()
     {
         if (dialogueManager == null)
@@ -28,6 +31,12 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        nameBox = GameObject.FindGameObjectWithTag("NameBox");
+        dialogBox = GameObject.FindGameObjectWithTag("DialogBox");
+    }
+
     public void Display()
     {
         sentences.Clear();
@@ -35,20 +44,20 @@ public class DialogueManager : MonoBehaviour
         Setup(currDialog);
 
         if (dialogName == "")
-            GameObject.FindGameObjectWithTag("NameBox").SetActive(false);
+            nameBox.SetActive(false);
         else
         {
-            GameObject.FindGameObjectWithTag("NameBox").SetActive(true);
+            nameBox.SetActive(true);
         }
 
-        GameObject.FindGameObjectWithTag("DialogBox").GetComponent<Animator>().SetBool("isActive", true);
+        dialogBox.GetComponent<Animator>().SetBool("isActive", true);
 
         DisplayNextSentence();
     }
 
     public void Hide()
     {
-        GameObject.FindGameObjectWithTag("DialogBox").GetComponent<Animator>().SetBool("isActive", false);
+        dialogBox.GetComponent<Animator>().SetBool("isActive", false);
     }
 
     public void DisplayNextSentence()
@@ -63,32 +72,33 @@ public class DialogueManager : MonoBehaviour
             else
             {
                 GameLoop.gameLoop.dialogueEnd = true;
+                EventManager.eventManager.HideEvent();
                 return;
             }
         }
         else
         {
             string sentence = sentences.Dequeue();
-            GameObject.FindGameObjectWithTag("DialogBox").transform.GetChild(0).GetComponent<Text>().text = sentence;
+            dialogBox.transform.GetChild(0).GetComponent<Text>().text = sentence;
+            StopAllCoroutines();
+            StartCoroutine(TypeSentence(sentence));
         }
-        //StopAllCoroutines();
-        //StartCoroutine(TypeSentence(sentence, dialogueText));
     }
 
-    //IEnumerator TypeSentence(string sentence, Text dialogueT)
-    //{
-    //    dialogueT.text = "";
-    //    foreach (char letter in sentence.ToCharArray())
-    //    {
-    //        dialogueT.text += letter;
-    //        yield return null;
-    //    }
-    //}
+    IEnumerator TypeSentence(string sentence)
+    {
+        dialogBox.transform.GetChild(0).GetComponent<Text>().text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            dialogBox.transform.GetChild(0).GetComponent<Text>().text += letter;
+            yield return null;
+        }
+    }
 
     void Setup(int dialogueIndex)
     {
         dialogName = dialogues[dialogueIndex].dialogName;
-        GameObject.FindGameObjectWithTag("NameBox").transform.GetChild(0).GetComponent<Text>().text = dialogName;
+        nameBox.transform.GetChild(0).GetComponent<Text>().text = dialogName;
 
         string[] lines = dialogues[dialogueIndex].dialogSentence.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
         for (int i = 0; i < lines.Length; i++)
