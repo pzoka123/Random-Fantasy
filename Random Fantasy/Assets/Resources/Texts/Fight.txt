@@ -1,0 +1,9 @@
+1Silver Knight
+2Hold up, Golden Knight. I have come to challenge you to a duel.
+
+1Golden Knight
+2Who are you? I don't remember seeing you before.
+
+1Silver Knight
+2My identity is of no importance. Today, we will see if your sword or my spear is stronger.
+2Prepare yourself!

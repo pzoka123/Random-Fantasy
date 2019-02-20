@@ -9,16 +9,9 @@ public class Choice : MonoBehaviour
 
     string[] sentences;
     public string[] Sentences { get => sentences; set => sentences = value; }
-
-    // Start is called before the first frame update
-    void Start()
+    
+    public void Clicked()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        DialogueManager.dialogueManager.Display();
     }
 }

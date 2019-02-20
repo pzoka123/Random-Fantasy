@@ -2,84 +2,98 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
-    Master gameManager;
-    DiceScript diceScript;
-    public Text nameText;
-    public Text dialogueText;
-    public Animator dialogueAnim;
+    public static DialogueManager dialogueManager { get; set; }
 
-    public GameObject currCard;
-    public GameObject[] cards;
+    public List<DialoguePart> dialogues;
+    //public string[,] dialogues;
+    int currDialog = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    string dialogName;
+    Queue<string> sentences = new Queue<string>();
+
+    void Awake()
     {
-        gameManager = GameObject.FindObjectOfType<Master>();
-        diceScript = GameObject.FindObjectOfType<DiceScript>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    
-    public void DisplayNextSentence()
-    {
-        if (currCard.GetComponent<Dialogue>().sentencesQueue.Count == 0)
+        if (dialogueManager == null)
         {
-            currCard.GetComponent<Dialogue>().EndDialogue();
-            dialogueAnim.SetBool("isActive", false);
-            if (currCard.GetComponent<Dialogue>().key == "Fighting")
-            {
-                gameManager.DiceBoardDisplay();
-                diceScript.Setup();
-            }
-            return;
+            dialogueManager = this;
+            DontDestroyOnLoad(gameObject);
         }
-        string sentence = currCard.GetComponent<Dialogue>().sentencesQueue.Dequeue();
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence, dialogueText));
-    }
-    
-    IEnumerator TypeSentence(string sentence, Text dialogueT)
-    {
-        dialogueT.text = "";
-        foreach (char letter in sentence.ToCharArray())
-        {
-            dialogueT.text += letter;
-            yield return null;
-        }
-    }
-
-    public void DialogDisplay(string name)
-    {
-        if (name == "")
-            nameText.rectTransform.parent.gameObject.SetActive(false);
         else
         {
-            nameText.rectTransform.parent.gameObject.SetActive(true);
-            nameText.text = name;
-        }
-        dialogueAnim.SetBool("isActive", true);
-
-        foreach(GameObject card in cards)
-        {
-            if (card != currCard)
-            {
-                card.SetActive(false);
-            }
+            Destroy(gameObject);
         }
     }
 
-    public void DialogReturn()
+    public void Display()
     {
-        foreach (GameObject card in cards)
+        sentences.Clear();
+
+        Setup(currDialog);
+
+        if (dialogName == "")
+            GameObject.FindGameObjectWithTag("NameBox").SetActive(false);
+        else
         {
-            card.SetActive(true);
+            GameObject.FindGameObjectWithTag("NameBox").SetActive(true);
+        }
+
+        GameObject.FindGameObjectWithTag("DialogBox").GetComponent<Animator>().SetBool("isActive", true);
+
+        DisplayNextSentence();
+    }
+
+    public void Hide()
+    {
+        GameObject.FindGameObjectWithTag("DialogBox").GetComponent<Animator>().SetBool("isActive", false);
+    }
+
+    public void DisplayNextSentence()
+    {
+        if (sentences.Count == 0)
+        {
+            currDialog++;
+            if (currDialog != dialogues.Count)
+            {
+                Display();
+            }
+            else
+            {
+                GameLoop.gameLoop.dialogueEnd = true;
+                return;
+            }
+        }
+        else
+        {
+            string sentence = sentences.Dequeue();
+            GameObject.FindGameObjectWithTag("DialogBox").transform.GetChild(0).GetComponent<Text>().text = sentence;
+        }
+        //StopAllCoroutines();
+        //StartCoroutine(TypeSentence(sentence, dialogueText));
+    }
+
+    //IEnumerator TypeSentence(string sentence, Text dialogueT)
+    //{
+    //    dialogueT.text = "";
+    //    foreach (char letter in sentence.ToCharArray())
+    //    {
+    //        dialogueT.text += letter;
+    //        yield return null;
+    //    }
+    //}
+
+    void Setup(int dialogueIndex)
+    {
+        dialogName = dialogues[dialogueIndex].dialogName;
+        GameObject.FindGameObjectWithTag("NameBox").transform.GetChild(0).GetComponent<Text>().text = dialogName;
+
+        string[] lines = dialogues[dialogueIndex].dialogSentence.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
+        for (int i = 0; i < lines.Length; i++)
+        {
+            sentences.Enqueue(lines[i]);
         }
     }
 }

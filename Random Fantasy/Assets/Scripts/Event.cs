@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Event : MonoBehaviour
 {
-    GameObject eventCard;
     GameObject[] choices;
 
     string eventName;
@@ -16,23 +15,21 @@ public class Event : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        eventCard = GameObject.FindGameObjectWithTag("EventCard");
-        choices = GameObject.FindGameObjectsWithTag("Choice");
+        choices = GameObject.FindGameObjectsWithTag("ChoiceCard");
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        if (GameLoop.gameLoop.dialogueEnd)
+        {
+            gameObject.GetComponent<Animator>().SetBool("isActive", false);
+        }
     }
 
-    public void Display()
+    public void Clicked()
     {
-
-    }
-
-    public void Hide()
-    {
-
+        gameObject.GetComponent<Animator>().SetBool("isActive", true);
+        GameLoop.gameLoop.textFile = Resources.Load("Texts/MysteriousTree") as TextAsset;
+        GameLoop.gameLoop.dialogueStart = true;
     }
 }

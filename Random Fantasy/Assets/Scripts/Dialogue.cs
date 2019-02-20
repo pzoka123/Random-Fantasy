@@ -2,86 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
-[System.Serializable]
 public class Dialogue : MonoBehaviour
 {
-    Master gameManager;
-    public string dialogName;
+    List<DialoguePart> dialogues = new List<DialoguePart>();
 
-    public string key;
+    //string[,] dialogues = new string[1,2];
 
-    [TextArea(3,10)]
-    public string[] sentences;
-    
-    public bool isClicked;
+    string[] parts;
+    string[] lines;
 
-    public Queue<string> sentencesQueue;
+    int count;
 
-    Animator anim;
-
-    DialogueManager dialogueManager;
-
-    // Start is called before the first frame update
-    void Start()
+    public void ReadText(TextAsset textFile)
     {
-        gameManager = GameObject.FindObjectOfType<Master>();
-        sentencesQueue = new Queue<string>();
-        anim = gameObject.GetComponent<Animator>();
-        dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
-    }
+        parts = textFile.text.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isClicked)
+        for (int i = 0; i < parts.Length; i++)
         {
-            StartDialogue();
-        }
-    }
+            DialoguePart tempPart = new DialoguePart();
 
-    public void StartDialogue()
-    {
-        dialogueManager.currCard = gameObject;
-        dialogueManager.DialogDisplay(dialogName);
-
-        if (gameObject.name != "Neutral")
-            anim.SetBool("isOpen", true);
-
-        sentencesQueue.Clear();
-        
-        foreach (string sentence in sentences)
-        {
-            sentencesQueue.Enqueue(sentence);
-        }
-        dialogueManager.DisplayNextSentence();
-    }
-
-    public void EndDialogue()
-    {
-        if (gameObject.name != "Neutral")
-            anim.SetBool("isOpen", false);
-        isClicked = false;
-        if (gameObject.tag != "EventCard")
-        {
-            gameObject.SetActive(false);
-            if (gameObject.tag == "Fight")
+            lines = parts[i].Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            for (int j = 0; j < lines.Length; j++)
             {
-                gameManager.fight = true;
+                if (lines[j][0] == '1')
+                {
+                    tempPart.dialogName = lines[j].Substring(1, lines[j].Length - 1);
+                    //dialogues[count, 0] = lines[j].Substring(1, lines[j].Length - 1);
+                }
+                else if (lines[j][0] == '2')
+                {
+                    tempPart.dialogSentence += "_" + lines[j].Substring(1, lines[j].Length - 1);
+                    //dialogues[count, 1] += "_" + lines[j].Substring(1, lines[j].Length - 1);
+                }
             }
-            else if (gameObject.tag == "Blessed")
-            {
-                gameManager.dice += 1;
-                gameManager.fight = true;
-            }
-            else if (gameObject.tag == "Sleep")
-            {
-                gameManager.sleep = true;
-            }
+            dialogues.Add(tempPart);
+            count++;
         }
-        else
-        {
-            dialogueManager.DialogReturn();
-        }
+        DialogueManager.dialogueManager.dialogues = dialogues;
     }
 }

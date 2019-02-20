@@ -4,46 +4,57 @@ using UnityEngine;
 
 public class GameLoop : MonoBehaviour
 {
+    public TextAsset textFile;
+
+    public static GameLoop gameLoop { get; set; }
+
     Event eventCard;
-    Dialogue dialogue;
     DiceScript diceBoard;
 
-    bool eventStart;
-    bool eventEnd;
-    bool dialogueStart;
-    bool dialogueEnd;
-    bool combatStart;
-    bool combatEnd;
+    public bool eventStart;
+    public bool eventEnd;
+    public bool dialogueStart;
+    public bool dialogueEnd;
+    public bool combatStart;
+    public bool combatEnd;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        if (gameLoop == null)
+        {
+            gameLoop = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (eventStart)
-        {
-            eventCard.Display();
-            eventStart = false;
-        }
-        if (eventEnd)
-        {
-            eventCard.Hide();
-            eventEnd = false;
-        }
-        //if (dialogueStart)
+        //if (eventStart)
         //{
         //    eventCard.Display();
         //    eventStart = false;
         //}
-        //if (dialogueEnd)
+        //if (eventEnd)
         //{
         //    eventCard.Hide();
         //    eventEnd = false;
         //}
+        if (dialogueStart)
+        {
+            gameObject.GetComponent<Dialogue>().ReadText(textFile);
+            dialogueStart = false;
+            DialogueManager.dialogueManager.Display();
+        }
+        if (dialogueEnd)
+        {
+            dialogueEnd = false;
+            DialogueManager.dialogueManager.Hide();
+        }
         //if (combatStart)
         //{
         //    eventCard.Display();

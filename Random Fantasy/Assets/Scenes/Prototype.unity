@@ -372,7 +372,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164366768}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1973ef999c9484641a1f949f86c85c08, type: 3}
   m_Name: 
@@ -590,8 +590,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 451861594}
-  - component: {fileID: 451861593}
   - component: {fileID: 451861595}
+  - component: {fileID: 451861593}
+  - component: {fileID: 451861596}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -611,15 +612,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4175ee6e8fa174290125b0294b9f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 2114669894}
-  dialogueText: {fileID: 1377130887}
-  dialogueAnim: {fileID: 666150261}
-  currCard: {fileID: 0}
-  cards:
-  - {fileID: 684609260}
-  - {fileID: 1458986286}
-  - {fileID: 1072325940}
-  - {fileID: 1310218765}
 --- !u!4 &451861594
 Transform:
   m_ObjectHideFlags: 0
@@ -643,19 +635,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 451861592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1d9771e7acb09648bdd55c298c666b2, type: 3}
+  m_Script: {fileID: 11500000, guid: fe1dd690237cdfd46bc5caf258e8b16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 451861593}
-  dice: 2
-  fight: 0
-  sleep: 0
-  dead: 0
-  callOnce: 1
-  callOnce2: 1
-  dialogue: {fileID: 948745726}
-  animDiceBoard: {fileID: 1690955178}
-  dark: {fileID: 1007586763}
+  textFile: {fileID: 0}
+  eventStart: 0
+  eventEnd: 0
+  dialogueStart: 0
+  dialogueEnd: 0
+  combatStart: 0
+  combatEnd: 0
+--- !u!114 &451861596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451861592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 308815cd6bc47f344b3582ce4389c591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &666150257
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,7 +672,7 @@ GameObject:
   - component: {fileID: 666150262}
   m_Layer: 5
   m_Name: DialogBox
-  m_TagString: Untagged
+  m_TagString: DialogBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -834,7 +835,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684609260}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -856,15 +857,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 684609260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308815cd6bc47f344b3582ce4389c591, type: 3}
+  m_Script: {fileID: 11500000, guid: ebbdc489b9f3da948b9c2dcc2abd025d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogName: Event
-  key: 
-  sentences:
-  - You see a weird looking tree on the side of the road. It looks like a living creature.
-  - What are you going to do?
-  isClicked: 0
 --- !u!114 &684609263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,7 +901,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 684609262}
-        m_MethodName: StartDialogue
+        m_MethodName: Clicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1285,53 +1280,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &948745724
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 948745725}
-  - component: {fileID: 948745726}
-  m_Layer: 0
-  m_Name: Neutral
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &948745725
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 948745724}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.34128064, y: -0.47056866, z: 0.11850668}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &948745726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 948745724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308815cd6bc47f344b3582ce4389c591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogName: 
-  key: 
-  sentences: []
-  isClicked: 0
 --- !u!1 &1007586761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,10 +1367,9 @@ GameObject:
   - component: {fileID: 1072325944}
   - component: {fileID: 1072325943}
   - component: {fileID: 1072325946}
-  - component: {fileID: 1072325942}
   m_Layer: 5
   m_Name: GreenCard
-  m_TagString: Blessed
+  m_TagString: ChoiceCard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1434,7 +1381,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072325940}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1447,27 +1394,6 @@ RectTransform:
   m_AnchoredPosition: {x: 175, y: -100}
   m_SizeDelta: {x: 140, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1072325942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1072325940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308815cd6bc47f344b3582ce4389c591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogName: 
-  key: 
-  sentences:
-  - You initiate a conversation with the tree. Surprisingly, the tree speaks back
-    to you.
-  - The tree tells you that there is another knight looking to challenge you. As a
-    gift, the tree casts a spell on you.
-  - '[You are now blessed with higher chance of hitting the enemy.]'
-  isClicked: 0
 --- !u!114 &1072325943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1508,7 +1434,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1072325942}
+      - m_Target: {fileID: 0}
         m_MethodName: StartDialogue
         m_Mode: 1
         m_Arguments:
@@ -1684,7 +1610,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118277480}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b93d0c135a5f75428de4cae99d331bc, type: 3}
   m_Name: 
@@ -1702,10 +1628,9 @@ GameObject:
   - component: {fileID: 1310218769}
   - component: {fileID: 1310218768}
   - component: {fileID: 1310218771}
-  - component: {fileID: 1310218767}
   m_Layer: 5
   m_Name: BlueCard
-  m_TagString: Sleep
+  m_TagString: ChoiceCard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1717,7 +1642,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310218765}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1730,23 +1655,6 @@ RectTransform:
   m_AnchoredPosition: {x: 350, y: -100}
   m_SizeDelta: {x: 140, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1310218767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1310218765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308815cd6bc47f344b3582ce4389c591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogName: Golden Knight
-  key: Sleep
-  sentences:
-  - I feel kinda tired from all the walking. I think I will take a nap.
-  isClicked: 0
 --- !u!114 &1310218768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1787,7 +1695,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1310218767}
+      - m_Target: {fileID: 0}
         m_MethodName: StartDialogue
         m_Mode: 1
         m_Arguments:
@@ -1951,10 +1859,9 @@ GameObject:
   - component: {fileID: 1458986289}
   - component: {fileID: 1458986288}
   - component: {fileID: 1458986292}
-  - component: {fileID: 1458986291}
   m_Layer: 5
   m_Name: RedCard
-  m_TagString: Fight
+  m_TagString: ChoiceCard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1966,7 +1873,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458986286}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2019,7 +1926,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1458986291}
+      - m_Target: {fileID: 0}
         m_MethodName: StartDialogue
         m_Mode: 1
         m_Arguments:
@@ -2069,24 +1976,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458986286}
   m_CullTransparentMesh: 0
---- !u!114 &1458986291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1458986286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308815cd6bc47f344b3582ce4389c591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogName: Golden Knight
-  key: 
-  sentences:
-  - The tree looks suspicious. I should not mess with it.
-  - Better keep going.
-  isClicked: 0
 --- !u!95 &1458986292
 Animator:
   serializedVersion: 3
@@ -2342,7 +2231,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690955173}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd4304f0e5817164e8d226843641ff28, type: 3}
   m_Name: 
@@ -2358,6 +2247,8 @@ MonoBehaviour:
   rollButton: {fileID: 379105183}
   canAtk: 0
   canDie: 0
+  canAtk2: 0
+  canDie2: 0
   endFight: 0
 --- !u!95 &1690955178
 Animator:
@@ -2575,7 +2466,7 @@ GameObject:
   - component: {fileID: 1919026865}
   m_Layer: 5
   m_Name: NameBox
-  m_TagString: Untagged
+  m_TagString: NameBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

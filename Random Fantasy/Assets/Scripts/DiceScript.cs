@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class DiceScript : MonoBehaviour
 {
-    Master gameManager;
     public Sprite[] diceSprites;
     public GameObject rollText;
     public GameObject rollButton;
@@ -22,7 +21,6 @@ public class DiceScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.FindObjectOfType<Master>();
     }
 
     // Update is called once per frame
@@ -33,12 +31,12 @@ public class DiceScript : MonoBehaviour
 
     public void Setup()
     {
-        activeDice = new GameObject[gameManager.dice];
-        for (int i = 0; i < gameManager.dice; i++)
-        {
-            gameObject.transform.GetChild(i).gameObject.SetActive(true);
-            activeDice[i] = gameObject.transform.GetChild(i).gameObject;
-        }
+        //activeDice = new GameObject[gameManager.dice];
+        //for (int i = 0; i < gameManager.dice; i++)
+        //{
+        //    gameObject.transform.GetChild(i).gameObject.SetActive(true);
+        //    activeDice[i] = gameObject.transform.GetChild(i).gameObject;
+        //}
     }
 
     public void Roll()

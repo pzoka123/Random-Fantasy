@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class KnightScript : MonoBehaviour
 {
-    Master gameManager;
     DiceScript diceManager;
 
     Animator anim;
@@ -18,7 +17,6 @@ public class KnightScript : MonoBehaviour
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
-        gameManager = GameObject.FindObjectOfType<Master>();
         diceManager = GameObject.FindObjectOfType<DiceScript>();
         startPos = transform.position;
     }
@@ -42,7 +40,6 @@ public class KnightScript : MonoBehaviour
         if (diceManager.canDie2)
         {
             anim.SetBool("die", true);
-            gameManager.DiceBoardHide();
             diceManager.endFight = 2;
         }
     }

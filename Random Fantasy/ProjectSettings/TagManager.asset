@@ -9,6 +9,9 @@ TagManager:
   - Fight
   - Blessed
   - Sleep
+  - NameBox
+  - DialogBox
+  - ChoiceCard
   layers:
   - Default
   - TransparentFX
