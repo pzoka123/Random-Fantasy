@@ -12,6 +12,9 @@ TagManager:
   - NameBox
   - DialogBox
   - ChoiceCard
+  - DiceBoard
+  - RollText
+  - RollButton
   layers:
   - Default
   - TransparentFX

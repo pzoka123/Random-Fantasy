@@ -72,7 +72,15 @@ public class DialogueManager : MonoBehaviour
             else
             {
                 GameLoop.gameLoop.dialogueEnd = true;
-                EventManager.eventManager.HideEvent();
+                if(EventManager.eventManager.currClicked.tag == "EventCard")
+                {
+                    EventManager.eventManager.ShowChoice();
+                    EventManager.eventManager.ReturnEvent();
+                }
+                else
+                {
+                    EventManager.eventManager.ReturnChoice();
+                }
                 return;
             }
         }

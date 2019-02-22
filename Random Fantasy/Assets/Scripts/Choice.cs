@@ -9,10 +9,13 @@ public class Choice : MonoBehaviour
 
     string[] sentences;
     public string[] Sentences { get => sentences; set => sentences = value; }
-    
+
     public void Clicked()
     {
         gameObject.GetComponent<Animator>().SetBool("isActive", true);
+        EventManager.eventManager.HideEvent();
+        EventManager.eventManager.currClicked = gameObject;
+        EventManager.eventManager.HideChoice();
         GameLoop.gameLoop.textFile = Resources.Load("Texts/Sleep") as TextAsset;
         GameLoop.gameLoop.dialogueStart = true;
     }

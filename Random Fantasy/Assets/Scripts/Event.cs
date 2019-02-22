@@ -21,6 +21,8 @@ public class Event : MonoBehaviour
     public void Clicked()
     {
         gameObject.GetComponent<Animator>().SetBool("isActive", true);
+        EventManager.eventManager.currClicked = gameObject;
+        EventManager.eventManager.HideChoice();
         GameLoop.gameLoop.textFile = Resources.Load("Texts/MysteriousTree") as TextAsset;
         GameLoop.gameLoop.dialogueStart = true;
     }

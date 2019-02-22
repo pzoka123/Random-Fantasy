@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class GameLoop : MonoBehaviour
 {
+    public IEnumerable gameState;
+
     public TextAsset textFile;
 
     public static GameLoop gameLoop { get; set; }
-
-    Event eventCard;
-    DiceScript diceBoard;
+    
+    DiceBoardManager diceBoard;
 
     public bool eventStart;
     public bool eventEnd;
@@ -17,6 +18,11 @@ public class GameLoop : MonoBehaviour
     public bool dialogueEnd;
     public bool combatStart;
     public bool combatEnd;
+
+    public bool isEvent;
+    public bool isDialogue;
+    public bool isAction;
+    public bool isCombat;
 
     void Awake()
     {
@@ -29,6 +35,12 @@ public class GameLoop : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Start()
+    {
+        gameState = EventState();
+        StartCoroutine(RunGameLoop());
     }
 
     // Update is called once per frame
@@ -55,15 +67,65 @@ public class GameLoop : MonoBehaviour
             dialogueEnd = false;
             DialogueManager.dialogueManager.Hide();
         }
-        //if (combatStart)
-        //{
-        //    eventCard.Display();
-        //    eventStart = false;
-        //}
-        //if (combatEnd)
-        //{
-        //    eventCard.Hide();
-        //    eventEnd = false;
-        //}
+        if (combatStart)
+        {
+            diceBoard.Display();
+            combatStart = false;
+        }
+        if (combatEnd)
+        {
+            diceBoard.Hide();
+            combatEnd = false;
+        }
+    }
+
+    public IEnumerator RunGameLoop()
+    {
+        while (gameState != null)
+        {
+            foreach (IEnumerable currState in gameState)
+            {
+                yield return currState;
+            }
+        }
+    }
+
+    public IEnumerable EventState()
+    {
+        while (true)
+        {
+            yield return null;
+        }
+    }
+
+    public IEnumerable DialogueState()
+    {
+        dialogueStart = true;
+        gameObject.GetComponent<Dialogue>().ReadText(textFile);
+        DialogueManager.dialogueManager.Display();
+        while (dialogueStart)
+        {
+            yield return null;
+        }
+
+        DialogueManager.dialogueManager.Hide();
+
+        gameState = ActionState();
+    }
+
+    public IEnumerable ActionState()
+    {
+        while (true)
+        {
+            yield return null;
+        }
+    }
+
+    public IEnumerable CombatState()
+    {
+        while (true)
+        {
+            yield return null;
+        }
     }
 }
