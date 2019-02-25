@@ -8,6 +8,7 @@ public class EventManager : MonoBehaviour
     public GameObject currClicked;
     public static EventManager eventManager { get; set; }
 
+    GameObject eventBoard;
     GameObject eventCard;
     GameObject[] choiceCards;
 
@@ -26,26 +27,30 @@ public class EventManager : MonoBehaviour
 
     void Start()
     {
+        eventBoard = GameObject.FindGameObjectWithTag("EventBoard");
         eventCard = GameObject.FindGameObjectWithTag("EventCard");
         choiceCards = GameObject.FindGameObjectsWithTag("ChoiceCard");
     }
 
     public void Display()
     {
-        eventCard.SetActive(true);
-        foreach (GameObject card in choiceCards)
-        {
-            card.SetActive(true);
-        }
+        //eventCard.SetActive(true);
+        //foreach (GameObject card in choiceCards)
+        //{
+        //    card.SetActive(true);
+        //}
+        GameObject.FindGameObjectWithTag("EventBoard").GetComponent<Animator>().SetBool("isActive", true);
     }
 
     public void Hide()
     {
-        eventCard.SetActive(false);
-        foreach (GameObject card in choiceCards)
-        {
-            card.SetActive(false);
-        }
+        //eventCard.SetActive(false);
+        //foreach (GameObject card in choiceCards)
+        //{
+        //    card.SetActive(false);
+        //}
+
+        eventBoard.GetComponent<Animator>().SetBool("isActive", false);
     }
 
     public void ReturnEvent()

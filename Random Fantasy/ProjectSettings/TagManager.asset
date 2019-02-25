@@ -15,6 +15,7 @@ TagManager:
   - DiceBoard
   - RollText
   - RollButton
+  - EventBoard
   layers:
   - Default
   - TransparentFX

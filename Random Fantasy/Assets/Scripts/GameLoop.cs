@@ -9,8 +9,6 @@ public class GameLoop : MonoBehaviour
     public TextAsset textFile;
 
     public static GameLoop gameLoop { get; set; }
-    
-    DiceBoardManager diceBoard;
 
     public bool eventStart;
     public bool eventEnd;
@@ -40,6 +38,7 @@ public class GameLoop : MonoBehaviour
     void Start()
     {
         gameState = EventState();
+        isEvent = true;
         StartCoroutine(RunGameLoop());
     }
 
@@ -69,12 +68,12 @@ public class GameLoop : MonoBehaviour
         }
         if (combatStart)
         {
-            diceBoard.Display();
+            DiceBoardManager.diceBoardManager.Display();
             combatStart = false;
         }
         if (combatEnd)
         {
-            diceBoard.Hide();
+            DiceBoardManager.diceBoardManager.Hide();
             combatEnd = false;
         }
     }
@@ -92,10 +91,17 @@ public class GameLoop : MonoBehaviour
 
     public IEnumerable EventState()
     {
-        while (true)
+        EventManager.eventManager.Display();
+        while (isEvent)
         {
             yield return null;
         }
+
+        if (isAction)
+            gameState = ActionState();
+        else if (isDialogue)
+            gameState = DialogueState();
+        EventManager.eventManager.Hide();
     }
 
     public IEnumerable DialogueState()
@@ -103,29 +109,47 @@ public class GameLoop : MonoBehaviour
         dialogueStart = true;
         gameObject.GetComponent<Dialogue>().ReadText(textFile);
         DialogueManager.dialogueManager.Display();
-        while (dialogueStart)
+        while (isDialogue)
         {
             yield return null;
         }
 
         DialogueManager.dialogueManager.Hide();
 
-        gameState = ActionState();
+        if (isAction)
+            gameState = ActionState();
+        else if (isEvent)
+            gameState = EventState();
     }
 
     public IEnumerable ActionState()
     {
-        while (true)
+        while (isAction)
         {
             yield return null;
         }
+
+        if (isDialogue)
+            gameState = ActionState();
+        else if (isEvent)
+            gameState = EventState();
+        else if (isCombat)
+            gameState = CombatState();
     }
 
     public IEnumerable CombatState()
     {
-        while (true)
+        DiceBoardManager.diceBoardManager.Display();
+        while (isCombat)
         {
             yield return null;
         }
+
+        if (isAction)
+            gameState = ActionState();
+        else if (isDialogue)
+            gameState = DialogueState();
+
+        DiceBoardManager.diceBoardManager.Hide();
     }
 }
