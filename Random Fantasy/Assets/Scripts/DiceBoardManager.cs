@@ -19,6 +19,7 @@ public class DiceBoardManager : MonoBehaviour
     public bool canDie2 = false;
     public int endFight = 0;
 
+    public int dice = 2;
     GameObject[] activeDice;
 
     void Awake()
@@ -43,6 +44,8 @@ public class DiceBoardManager : MonoBehaviour
 
     public void Display()
     {
+        rollText.SetActive(false);
+        rollButton.SetActive(true);
         diceBoard.GetComponent<Animator>().SetBool("isActive", true);
     }
 
@@ -71,17 +74,25 @@ public class DiceBoardManager : MonoBehaviour
         if (rollNum <= 7)
         {
             isHit = "The opponent gets the upper hand and strikes you first.";
-            canAtk = false;
-            canAtk2 = true;
+            ActionManager.actionManager.otherChar.GetComponent<Character>().attack = true;
         }
         else
         {
             isHit = "You get to strike first.";
-            canAtk = true;
-            canAtk2 = false;
+            ActionManager.actionManager.mainChar.GetComponent<Character>().attack = true;
         }
         rollText.GetComponent<Text>().text = rollNum.ToString() + ". " + isHit;
         rollText.SetActive(true);
         rollButton.SetActive(false);
+    }
+
+    public void Setup()
+    {
+        activeDice = new GameObject[dice];
+        for (int i = 0; i < dice; i++)
+        {
+            diceBoard.transform.GetChild(i).gameObject.SetActive(true);
+            activeDice[i] = diceBoard.transform.GetChild(i).gameObject;
+        }
     }
 }

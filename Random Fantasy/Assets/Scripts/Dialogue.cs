@@ -13,10 +13,10 @@ public class Dialogue : MonoBehaviour
     string[] parts;
     string[] lines;
 
-    int count;
-
     public void ReadText(TextAsset textFile)
     {
+        DialogueManager.dialogueManager.dialogues.Clear();
+
         parts = textFile.text.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
         for (int i = 0; i < parts.Length; i++)
@@ -34,9 +34,21 @@ public class Dialogue : MonoBehaviour
                 {
                     tempPart.dialogSentence += "_" + lines[j].Substring(1, lines[j].Length - 1);
                 }
+                else if (lines[j][0] == '3')
+                {
+                    DialogueManager.dialogueManager.nextAction = lines[j].Substring(1, lines[j].Length - 1);
+                }
+                else if (lines[j][0] == '4')
+                {
+                    DialogueManager.dialogueManager.nextEvent = lines[j].Substring(1, lines[j].Length - 1);
+                }
+                else if (lines[j][0] == '5')
+                {
+                    string[] sections = lines[j].Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
+                    DiceBoardManager.diceBoardManager.dice += Convert.ToInt32(sections[1]);
+                }
             }
             dialogues.Add(tempPart);
-            count++;
         }
         DialogueManager.dialogueManager.dialogues = dialogues;
     }

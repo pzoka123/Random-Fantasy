@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class EventManager : MonoBehaviour
 {
-    public GameObject currClicked;
     public static EventManager eventManager { get; set; }
+
+    public GameObject currClicked;
+    public bool eventPhase;
 
     GameObject eventBoard;
     GameObject eventCard;

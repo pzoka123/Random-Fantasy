@@ -16,7 +16,9 @@ public class Choice : MonoBehaviour
         EventManager.eventManager.HideEvent();
         EventManager.eventManager.currClicked = gameObject;
         EventManager.eventManager.HideChoice();
-        GameLoop.gameLoop.textFile = Resources.Load("Texts/Sleep") as TextAsset;
-        GameLoop.gameLoop.dialogueStart = true;
+        GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + gameObject.name) as TextAsset;
+        //GameLoop.gameLoop.dialogueStart = true;
+        GameLoop.gameLoop.isEvent = false;
+        GameLoop.gameLoop.isDialogue = true;
     }
 }

@@ -8,7 +8,7 @@ public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager dialogueManager { get; set; }
 
-    public List<DialoguePart> dialogues;
+    public List<DialoguePart> dialogues = new List<DialoguePart>();
     //public string[,] dialogues;
     int currDialog = 0;
 
@@ -17,6 +17,9 @@ public class DialogueManager : MonoBehaviour
 
     GameObject nameBox;
     GameObject dialogBox;
+
+    public string nextAction;
+    public string nextEvent;
 
     void Awake()
     {
@@ -71,16 +74,28 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                GameLoop.gameLoop.dialogueEnd = true;
-                if(EventManager.eventManager.currClicked.tag == "EventCard")
+                //GameLoop.gameLoop.dialogueEnd = true;
+                GameLoop.gameLoop.isDialogue = false;
+                if (EventManager.eventManager.eventPhase)
                 {
-                    EventManager.eventManager.ShowChoice();
-                    EventManager.eventManager.ReturnEvent();
+                    if (EventManager.eventManager.currClicked.tag == "EventCard")
+                    {
+                        GameLoop.gameLoop.isEvent = true;
+                        EventManager.eventManager.ShowChoice();
+                        EventManager.eventManager.ReturnEvent();
+                    }
+                    else if (EventManager.eventManager.currClicked.tag == "ChoiceCard")
+                    {
+                        GameLoop.gameLoop.isAction = true;
+                        EventManager.eventManager.ReturnChoice();
+                        EventManager.eventManager.eventPhase = false;
+                    }
                 }
                 else
                 {
-                    EventManager.eventManager.ReturnChoice();
+                    GameLoop.gameLoop.isCombat = true;
                 }
+                currDialog = 0;
                 return;
             }
         }
