@@ -76,7 +76,7 @@ public class DialogueManager : MonoBehaviour
             {
                 //GameLoop.gameLoop.dialogueEnd = true;
                 GameLoop.gameLoop.isDialogue = false;
-                if (EventManager.eventManager.eventPhase)
+                if (GameLoop.gameLoop.eventPhase)
                 {
                     if (EventManager.eventManager.currClicked.tag == "EventCard")
                     {
@@ -88,11 +88,12 @@ public class DialogueManager : MonoBehaviour
                     {
                         GameLoop.gameLoop.isAction = true;
                         EventManager.eventManager.ReturnChoice();
-                        EventManager.eventManager.eventPhase = false;
+                        GameLoop.gameLoop.eventPhase = false;
                     }
                 }
                 else
                 {
+                    Debug.Log(GameLoop.gameLoop.isEnd);
                     GameLoop.gameLoop.isCombat = true;
                 }
                 currDialog = 0;

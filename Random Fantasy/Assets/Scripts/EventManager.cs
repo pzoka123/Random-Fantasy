@@ -8,7 +8,6 @@ public class EventManager : MonoBehaviour
     public static EventManager eventManager { get; set; }
 
     public GameObject currClicked;
-    public bool eventPhase;
 
     GameObject eventBoard;
     GameObject eventCard;

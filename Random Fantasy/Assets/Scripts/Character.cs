@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
 
     public bool attack;
     public bool die;
+    public bool isDead;
 
     GameObject positions;
     public int posNum;
@@ -72,17 +73,20 @@ public class Character : MonoBehaviour
 
     public void CharDie()
     {
-        Debug.Log("DIE");
         if (die)
         {
+            isDead = true;
             anim.SetBool("die", true);
             die = false;
+        }
+        if (gameObject.tag == "Player")
+        {
+            GameLoop.gameLoop.isEnd = true;
         }
     }
 
     public void EndAttack()
     {
-        Debug.Log("End Attack");
         if (gameObject.tag == "Player" && anim.GetBool("attack"))
         {
             ActionManager.actionManager.otherChar.GetComponent<Character>().die = true;

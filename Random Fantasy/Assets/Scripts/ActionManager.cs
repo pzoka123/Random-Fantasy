@@ -73,6 +73,13 @@ public class ActionManager : MonoBehaviour
                 GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + sub) as TextAsset;
                 nextDialogue = true;
             }
+            else if (lines[i][0] == '4')
+            {
+                if (sub == "isEnd")
+                {
+                    GameLoop.gameLoop.isEnd = true;
+                }
+            }
         }
     }
 

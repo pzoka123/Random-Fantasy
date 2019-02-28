@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameLoop : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class GameLoop : MonoBehaviour
     //public bool dialogueEnd;
     //public bool combatStart;
     //public bool combatEnd;
+
+    public bool eventPhase;
 
     public bool isEvent;
     public bool isDialogue;
@@ -42,7 +45,7 @@ public class GameLoop : MonoBehaviour
     {
         gameState = EventState();
         isEvent = true;
-        EventManager.eventManager.eventPhase = true;
+        eventPhase = true;
         StartCoroutine(RunGameLoop());
     }
 
@@ -161,7 +164,7 @@ public class GameLoop : MonoBehaviour
             yield return null;
         }
 
-        if (ActionManager.actionManager.otherChar.GetComponent<Character>().die)
+        if (ActionManager.actionManager.otherChar.GetComponent<Character>().isDead)
         {
             Debug.Log("Victory");
             textFile = Resources.Load("Dialogues/Victory") as TextAsset;
@@ -182,9 +185,13 @@ public class GameLoop : MonoBehaviour
 
     public IEnumerable EndState()
     {
+        float lerpVal = 0;
         while (isEnd)
         {
-
+            Debug.Log("END");
+            dark.SetActive(true);
+            lerpVal += Time.deltaTime / 1.5f;
+            dark.GetComponent<Image>().color = new Color(0,0,0,Mathf.Lerp(0.0f, 1.0f, lerpVal));
             yield return null;
         }
     }
