@@ -1,4 +1,4 @@
 1
 2
 3DeathDialogue
-4isEnd
+4isDead

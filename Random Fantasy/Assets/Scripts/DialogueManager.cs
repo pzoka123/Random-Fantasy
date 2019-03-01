@@ -91,9 +91,8 @@ public class DialogueManager : MonoBehaviour
                         GameLoop.gameLoop.eventPhase = false;
                     }
                 }
-                else
+                else if (!GameLoop.gameLoop.isEnd)
                 {
-                    Debug.Log(GameLoop.gameLoop.isEnd);
                     GameLoop.gameLoop.isCombat = true;
                 }
                 currDialog = 0;

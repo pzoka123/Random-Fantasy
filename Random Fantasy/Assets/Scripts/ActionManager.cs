@@ -75,9 +75,9 @@ public class ActionManager : MonoBehaviour
             }
             else if (lines[i][0] == '4')
             {
-                if (sub == "isEnd")
+                if (sub == "isDead")
                 {
-                    GameLoop.gameLoop.isEnd = true;
+                    GameLoop.gameLoop.isDead = true;
                 }
             }
         }
@@ -139,6 +139,20 @@ public class ActionManager : MonoBehaviour
             GameLoop.gameLoop.isCombat = false;
             GameLoop.gameLoop.isDialogue = true;
             nextDialogue = false;
+        }
+    }
+
+    public void Death()
+    {
+        if (GameLoop.gameLoop.darkVal < 1)
+        {
+            GameLoop.gameLoop.dark.SetActive(true);
+            GameLoop.gameLoop.darkVal += Time.deltaTime / 1.5f;
+            GameLoop.gameLoop.dark.GetComponent<Image>().color = new Color(0, 0, 0, Mathf.Lerp(0.0f, 1.0f, GameLoop.gameLoop.darkVal));
+        }
+        else
+        {
+            GameLoop.gameLoop.isDead = false;
         }
     }
 }

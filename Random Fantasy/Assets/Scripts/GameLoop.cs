@@ -10,6 +10,7 @@ public class GameLoop : MonoBehaviour
     public TextAsset textFile;
 
     public GameObject dark;
+    public float darkVal = 0;
 
     public static GameLoop gameLoop { get; set; }
 
@@ -21,6 +22,7 @@ public class GameLoop : MonoBehaviour
     //public bool combatEnd;
 
     public bool eventPhase;
+    public bool isDead;
 
     public bool isEvent;
     public bool isDialogue;
@@ -115,6 +117,14 @@ public class GameLoop : MonoBehaviour
     {
         //dialogueStart = true;
         gameObject.GetComponent<Dialogue>().ReadText(textFile);
+
+        while (isDead)
+        {
+            Debug.Log("ISDEAD");
+            ActionManager.actionManager.Death();
+            yield return null;
+        }
+
         DialogueManager.dialogueManager.Display();
         while (isDialogue)
         {
@@ -185,13 +195,9 @@ public class GameLoop : MonoBehaviour
 
     public IEnumerable EndState()
     {
-        float lerpVal = 0;
         while (isEnd)
         {
             Debug.Log("END");
-            dark.SetActive(true);
-            lerpVal += Time.deltaTime / 1.5f;
-            dark.GetComponent<Image>().color = new Color(0,0,0,Mathf.Lerp(0.0f, 1.0f, lerpVal));
             yield return null;
         }
     }
