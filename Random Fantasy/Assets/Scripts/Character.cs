@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public bool walkIn;
-    public bool walkOut;
+    public bool move;
 
     public bool attack;
     public bool die;
@@ -37,17 +36,18 @@ public class Character : MonoBehaviour
         
     }
 
-    public void CharWalkIn()
+    public void CharMove()
     {
-        if (walkIn)
+        if (move)
         {
             endPos = new Vector3(positions.transform.GetChild(posNum).transform.position.x, transform.position.y, transform.position.z);
             lerpValue += Time.deltaTime / speed;
             transform.position = Vector3.Lerp(startPos, endPos, lerpValue);
             if (transform.position == endPos)
             {
-                anim.SetBool("in", false);
-                walkIn = false;
+                anim.SetBool("walk", false);
+                anim.SetBool("run", false);
+                move = false;
                 lerpValue = 0;
                 startPos = transform.position;
             }

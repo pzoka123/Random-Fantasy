@@ -120,8 +120,9 @@ public class GameLoop : MonoBehaviour
 
         while (isDead)
         {
-            Debug.Log("ISDEAD");
-            ActionManager.actionManager.Death();
+            FadeOut();
+            if (dark.GetComponent<Image>().color.a == 1)
+                isDead = false;
             yield return null;
         }
 
@@ -149,7 +150,7 @@ public class GameLoop : MonoBehaviour
         ActionManager.actionManager.ReadText(textFile);
         while (isAction)
         {
-            ActionManager.actionManager.WalkIn();
+            ActionManager.actionManager.Move();
             yield return null;
         }
 
@@ -200,5 +201,15 @@ public class GameLoop : MonoBehaviour
             Debug.Log("END");
             yield return null;
         }
+    }
+
+    public void FadeOut()
+    {
+        dark.GetComponent<Animator>().SetBool("fadeOut", true);
+    }
+
+    public void FadeInt()
+    {
+        dark.GetComponent<Animator>().SetBool("fadeOut", false);
     }
 }

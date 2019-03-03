@@ -411,6 +411,7 @@ MonoBehaviour:
   walkOut: 0
   attack: 0
   die: 0
+  isDead: 0
   posNum: 0
 --- !u!1 &287886356
 GameObject:
@@ -710,6 +711,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textFile: {fileID: 0}
   dark: {fileID: 1007586761}
+  darkVal: 0
+  eventPhase: 0
+  isDead: 0
   isEvent: 0
   isDialogue: 0
   isAction: 0
@@ -740,7 +744,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currClicked: {fileID: 0}
-  eventPhase: 0
 --- !u!114 &451861598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1543,13 +1546,14 @@ GameObject:
   - component: {fileID: 1007586762}
   - component: {fileID: 1007586764}
   - component: {fileID: 1007586763}
+  - component: {fileID: 1007586765}
   m_Layer: 5
   m_Name: Dark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1007586762
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1606,6 +1610,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007586761}
   m_CullTransparentMesh: 0
+--- !u!95 &1007586765
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007586761}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2826976d59ac4ea41b5475913e8fe19e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1072325940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1884,6 +1907,7 @@ MonoBehaviour:
   walkOut: 0
   attack: 0
   die: 0
+  isDead: 0
   posNum: 0
 --- !u!1 &1310218765
 GameObject:

@@ -1,0 +1,21 @@
+1Shopkeeper
+2Welcome. What can I do for you?
+
+1Golden Knight
+2I want a magic potion to enhance my strength.
+2Do you have any?
+
+1Shopkeeper
+2I do, indeed. But you cannot pay for it, for it is too valuable to be traded with gold.
+
+1Golden Knight
+2Then what do you want?
+
+1Shopkeeper
+2You must bring me a part of the golem residing in the ruin.
+2Only then will I consider giving you this potion.
+
+1Golden Knight
+2Very well then.
+
+3LeaveShop

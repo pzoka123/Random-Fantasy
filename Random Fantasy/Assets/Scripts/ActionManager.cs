@@ -45,27 +45,37 @@ public class ActionManager : MonoBehaviour
 
             if (lines[i][0] == '1')
             {
-                if (sub == "in")
+                if (sub == "walk")
                 {
-                    mainChar.GetComponent<Animator>().SetBool("in", true);
-                    mainChar.GetComponent<Character>().walkIn = true;
+                    mainChar.GetComponent<Animator>().SetBool("walk", true);
+                    mainChar.GetComponent<Animator>().SetBool("move", true);
+                    mainChar.GetComponent<Character>().move = true;
                 }
-                else if (sub == "out")
+                else if (sub == "run")
                 {
-                    mainChar.GetComponent<Animator>().SetBool("in", false);
+                    mainChar.GetComponent<Animator>().SetBool("run", true);
+                    mainChar.GetComponent<Animator>().SetBool("move", true);
                 }
             }
             else if (lines[i][0] == '2')
             {
-                if (sub == "in")
+                if (sub == "walk")
                 {
-                    otherChar.GetComponent<Animator>().SetBool("in", true);
-                    otherChar.GetComponent<Character>().walkIn = true;
+                    otherChar.GetComponent<Animator>().SetBool("walk", true);
+                    otherChar.GetComponent<Character>().move = true;
                     otherChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
+                    if (sections[2] == "left")
+                    {
+                        otherChar.GetComponent<SpriteRenderer>().flipX = true;
+                    }
+                    else
+                    {
+                        otherChar.GetComponent<SpriteRenderer>().flipX = false;
+                    }
                 }
-                else if (sub == "out")
+                else if (sub == "run")
                 {
-                    otherChar.GetComponent<Animator>().SetBool("in", false);
+                    mainChar.GetComponent<Animator>().SetBool("run", true);
                 }
             }
             else if (lines[i][0] == '3')
@@ -83,13 +93,13 @@ public class ActionManager : MonoBehaviour
         }
     }
 
-    public void WalkIn()
+    public void Move()
     {
         //mainChar.GetComponent<Character>().CharWalkIn();
-        otherChar.GetComponent<Character>().CharWalkIn();
+        otherChar.GetComponent<Character>().CharMove();
 
         //if (!mainChar.GetComponent<Character>().walkIn && !otherChar.GetComponent<Character>().walkIn)
-        if (!otherChar.GetComponent<Character>().walkIn)
+        if (!otherChar.GetComponent<Character>().move)
         {
             if (nextDialogue)
             {
@@ -139,20 +149,6 @@ public class ActionManager : MonoBehaviour
             GameLoop.gameLoop.isCombat = false;
             GameLoop.gameLoop.isDialogue = true;
             nextDialogue = false;
-        }
-    }
-
-    public void Death()
-    {
-        if (GameLoop.gameLoop.darkVal < 1)
-        {
-            GameLoop.gameLoop.dark.SetActive(true);
-            GameLoop.gameLoop.darkVal += Time.deltaTime / 1.5f;
-            GameLoop.gameLoop.dark.GetComponent<Image>().color = new Color(0, 0, 0, Mathf.Lerp(0.0f, 1.0f, GameLoop.gameLoop.darkVal));
-        }
-        else
-        {
-            GameLoop.gameLoop.isDead = false;
         }
     }
 }
