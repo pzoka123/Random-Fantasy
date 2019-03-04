@@ -48,13 +48,30 @@ public class ActionManager : MonoBehaviour
                 if (sub == "walk")
                 {
                     mainChar.GetComponent<Animator>().SetBool("walk", true);
-                    mainChar.GetComponent<Animator>().SetBool("move", true);
                     mainChar.GetComponent<Character>().move = true;
+                    mainChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
+                    if (sections[2] == "left")
+                    {
+                        mainChar.GetComponent<SpriteRenderer>().flipX = true;
+                    }
+                    else
+                    {
+                        mainChar.GetComponent<SpriteRenderer>().flipX = false;
+                    }
                 }
                 else if (sub == "run")
                 {
                     mainChar.GetComponent<Animator>().SetBool("run", true);
-                    mainChar.GetComponent<Animator>().SetBool("move", true);
+                    mainChar.GetComponent<Character>().move = true;
+                    mainChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
+                    if (sections[2] == "left")
+                    {
+                        mainChar.GetComponent<SpriteRenderer>().flipX = true;
+                    }
+                    else
+                    {
+                        mainChar.GetComponent<SpriteRenderer>().flipX = false;
+                    }
                 }
             }
             else if (lines[i][0] == '2')
@@ -75,7 +92,17 @@ public class ActionManager : MonoBehaviour
                 }
                 else if (sub == "run")
                 {
-                    mainChar.GetComponent<Animator>().SetBool("run", true);
+                    otherChar.GetComponent<Animator>().SetBool("run", true);
+                    otherChar.GetComponent<Character>().move = true;
+                    otherChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
+                    if (sections[2] == "left")
+                    {
+                        otherChar.GetComponent<SpriteRenderer>().flipX = true;
+                    }
+                    else
+                    {
+                        otherChar.GetComponent<SpriteRenderer>().flipX = false;
+                    }
                 }
             }
             else if (lines[i][0] == '3')
@@ -89,6 +116,11 @@ public class ActionManager : MonoBehaviour
                 {
                     GameLoop.gameLoop.isDead = true;
                 }
+            }
+            else if (lines[i][0] == '5')
+            {
+                GameLoop.gameLoop.FadeOut();
+                GameLoop.gameLoop.LoadScene(sub);
             }
         }
     }

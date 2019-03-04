@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameLoop : MonoBehaviour
 {
@@ -211,5 +212,10 @@ public class GameLoop : MonoBehaviour
     public void FadeInt()
     {
         dark.GetComponent<Animator>().SetBool("fadeOut", false);
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
