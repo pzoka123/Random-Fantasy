@@ -17,5 +17,4 @@
 
 1Golden Knight
 2Very well then.
-
-3LeaveShop
+3LeaveShop:action

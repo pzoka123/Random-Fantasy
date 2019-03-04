@@ -36,7 +36,26 @@ public class Dialogue : MonoBehaviour
                 }
                 else if (lines[j][0] == '3')
                 {
-                    DialogueManager.dialogueManager.nextAction = lines[j].Substring(1, lines[j].Length - 1);
+                    string[] sections = lines[j].Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
+                    DialogueManager.dialogueManager.nextAction = sections[0].Substring(1, sections[0].Length - 1);
+                    if (sections[1] == "combat")
+                    {
+                        DialogueManager.dialogueManager.combat = true;
+                        DialogueManager.dialogueManager.end = false;
+                        DialogueManager.dialogueManager.action = false;
+                    }
+                    else if (sections[1] == "end")
+                    {
+                        DialogueManager.dialogueManager.combat = false;
+                        DialogueManager.dialogueManager.end = true;
+                        DialogueManager.dialogueManager.action = false;
+                    }
+                    else if (sections[1] == "action")
+                    {
+                        DialogueManager.dialogueManager.combat = false;
+                        DialogueManager.dialogueManager.end = false;
+                        DialogueManager.dialogueManager.action = true;
+                    }
                 }
                 else if (lines[j][0] == '4')
                 {

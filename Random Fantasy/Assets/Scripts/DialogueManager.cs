@@ -21,6 +21,10 @@ public class DialogueManager : MonoBehaviour
     public string nextAction;
     public string nextEvent;
 
+    public bool combat;
+    public bool end;
+    public bool action;
+
     void Awake()
     {
         if (dialogueManager == null)
@@ -91,9 +95,13 @@ public class DialogueManager : MonoBehaviour
                         GameLoop.gameLoop.eventPhase = false;
                     }
                 }
-                else if (!GameLoop.gameLoop.isEnd)
+                else if (combat)
                 {
                     GameLoop.gameLoop.isCombat = true;
+                }
+                else if (action)
+                {
+                    GameLoop.gameLoop.isAction = true;
                 }
                 currDialog = 0;
                 return;
@@ -122,7 +130,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogName = dialogues[dialogueIndex].dialogName;
         nameBox.transform.GetChild(0).GetComponent<Text>().text = dialogName;
-
+        
         string[] lines = dialogues[dialogueIndex].dialogSentence.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
         for (int i = 0; i < lines.Length; i++)
         {

@@ -2,5 +2,5 @@
 2You initiate a conversation with the weird-looking tree.
 2Fortunately, the tree is an ancient being that blesses anyone who talks to it.
 2[You receive "Ancient Blessing" from the tree. Now you have higher chance of hitting your opponent.]
-3Fight
+3Fight:combat
 5dice:1

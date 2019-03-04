@@ -15,21 +15,17 @@ public class GameLoop : MonoBehaviour
 
     public static GameLoop gameLoop { get; set; }
 
-    //public bool eventStart;
-    //public bool eventEnd;
-    //public bool dialogueStart;
-    //public bool dialogueEnd;
-    //public bool combatStart;
-    //public bool combatEnd;
+    public bool startGame = false;
+    public bool eventPhase = false;
+    public bool isDead = false;
+    public bool endScene = false;
+    public string nextScene;
 
-    public bool eventPhase;
-    public bool isDead;
-
-    public bool isEvent;
-    public bool isDialogue;
-    public bool isAction;
-    public bool isCombat;
-    public bool isEnd;
+    public bool isEvent = false;
+    public bool isDialogue = false;
+    public bool isAction = false;
+    public bool isCombat = false;
+    public bool isEnd = false;
 
     void Awake()
     {
@@ -46,46 +42,16 @@ public class GameLoop : MonoBehaviour
 
     void Start()
     {
-        gameState = EventState();
-        isEvent = true;
-        eventPhase = true;
+        gameState = ActionState();
+        isAction = true;
+        startGame = true;
         StartCoroutine(RunGameLoop());
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (eventStart)
-        //{
-        //    eventCard.Display();
-        //    eventStart = false;
-        //}
-        //if (eventEnd)
-        //{
-        //    eventCard.Hide();
-        //    eventEnd = false;
-        //}
-        //if (dialogueStart)
-        //{
-        //    gameObject.GetComponent<Dialogue>().ReadText(textFile);
-        //    dialogueStart = false;
-        //    DialogueManager.dialogueManager.Display();
-        //}
-        //if (dialogueEnd)
-        //{
-        //    dialogueEnd = false;
-        //    DialogueManager.dialogueManager.Hide();
-        //}
-        //if (combatStart)
-        //{
-        //    DiceBoardManager.diceBoardManager.Display();
-        //    combatStart = false;
-        //}
-        //if (combatEnd)
-        //{
-        //    DiceBoardManager.diceBoardManager.Hide();
-        //    combatEnd = false;
-        //}
+
     }
 
     public IEnumerator RunGameLoop()
@@ -98,7 +64,7 @@ public class GameLoop : MonoBehaviour
             }
         }
     }
-
+    
     public IEnumerable EventState()
     {
         EventManager.eventManager.Display();
@@ -147,11 +113,31 @@ public class GameLoop : MonoBehaviour
 
     public IEnumerable ActionState()
     {
-        textFile = Resources.Load("Actions/" + DialogueManager.dialogueManager.nextAction) as TextAsset;
+        if (startGame)
+        {
+            textFile = Resources.Load("Starts/Seller") as TextAsset;
+            startGame = false;
+        }
+        else
+        {
+            textFile = Resources.Load("Actions/" + DialogueManager.dialogueManager.nextAction) as TextAsset;
+        }
         ActionManager.actionManager.ReadText(textFile);
+
         while (isAction)
         {
             ActionManager.actionManager.Move();
+            yield return null;
+        }
+
+        while (endScene)
+        {
+            FadeOut();
+            if (dark.GetComponent<Image>().color.a == 1)
+            {
+                endScene = false;
+                LoadScene(nextScene);
+            }
             yield return null;
         }
 

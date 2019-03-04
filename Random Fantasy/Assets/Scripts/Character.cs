@@ -20,14 +20,19 @@ public class Character : MonoBehaviour
     float speed = 3.0f;
     float lerpValue = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         positions = GameObject.FindGameObjectWithTag("Positions");
 
         anim = gameObject.GetComponent<Animator>();
         startPos = transform.position;
         endPos = Vector3.zero;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame

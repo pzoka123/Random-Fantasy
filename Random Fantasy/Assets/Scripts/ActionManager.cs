@@ -119,19 +119,20 @@ public class ActionManager : MonoBehaviour
             }
             else if (lines[i][0] == '5')
             {
-                GameLoop.gameLoop.FadeOut();
-                GameLoop.gameLoop.LoadScene(sub);
+                GameLoop.gameLoop.endScene = true;
+                GameLoop.gameLoop.nextScene = sub;
+                //GameLoop.gameLoop.FadeOut();
+                //GameLoop.gameLoop.LoadScene(sub);
             }
         }
     }
 
     public void Move()
     {
-        //mainChar.GetComponent<Character>().CharWalkIn();
+        mainChar.GetComponent<Character>().CharMove();
         otherChar.GetComponent<Character>().CharMove();
-
-        //if (!mainChar.GetComponent<Character>().walkIn && !otherChar.GetComponent<Character>().walkIn)
-        if (!otherChar.GetComponent<Character>().move)
+        
+        if (!mainChar.GetComponent<Character>().move && !otherChar.GetComponent<Character>().move)
         {
             if (nextDialogue)
             {
