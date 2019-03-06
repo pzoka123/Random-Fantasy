@@ -182,7 +182,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Go to sleep
+  m_Text: Take the golem's arm
 --- !u!222 &39014218
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -649,7 +649,7 @@ GameObject:
   - component: {fileID: 287382590}
   - component: {fileID: 287382589}
   m_Layer: 5
-  m_Name: GoAhead
+  m_Name: TakeItsEye
   m_TagString: ChoiceCard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -999,7 +999,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Talk to the tree
+  m_Text: Take the golem's head
 --- !u!222 &685734086
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2010,7 +2010,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Weird Looking Tree.
+  m_Text: The golem parts
 --- !u!222 &1547393657
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2147,6 +2147,8 @@ MonoBehaviour:
   isAction: 0
   isCombat: 0
   isEnd: 0
+  victoryText: 
+  defeatText: 
 --- !u!4 &1549547840
 Transform:
   m_ObjectHideFlags: 0
@@ -2231,7 +2233,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Keep going
+  m_Text: Take the golem's eye
 --- !u!222 &1615636803
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2548,7 +2550,7 @@ GameObject:
   - component: {fileID: 1924063739}
   - component: {fileID: 1924063738}
   m_Layer: 5
-  m_Name: TalkToTree
+  m_Name: TakeItsHead
   m_TagString: ChoiceCard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2710,7 +2712,7 @@ GameObject:
   - component: {fileID: 1959934649}
   - component: {fileID: 1959934648}
   m_Layer: 5
-  m_Name: Sleep
+  m_Name: TakeItsArm
   m_TagString: ChoiceCard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

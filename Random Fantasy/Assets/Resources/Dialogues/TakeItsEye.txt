@@ -1,0 +1,6 @@
+1Golden Knight
+2I guess an eye would suffice.
+
+1
+2You promptly took out one of the stone eye and put it in your inventory.
+3GoBack:action

@@ -141,6 +141,11 @@ public class ActionManager : MonoBehaviour
                 //GameLoop.gameLoop.FadeOut();
                 //GameLoop.gameLoop.LoadScene(sub);
             }
+            else if (lines[i][0] == '6')
+            {
+                GameLoop.gameLoop.victoryText = sub;
+                GameLoop.gameLoop.defeatText = sections[1];
+            }
         }
     }
 

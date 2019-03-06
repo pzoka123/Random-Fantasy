@@ -1,0 +1,6 @@
+1Golden Knight
+2An arm should be a decent amount of "parts".
+
+1
+2You pick up one of its stone arm and bring it back in your hand.
+3GoBack:action

@@ -1,0 +1,6 @@
+1Golden Knight
+2The bigger the better, so I will bring the whole head back for him.
+
+1
+2You pick up the heavy stone head with all your might and carry it back.
+3GoBack:action

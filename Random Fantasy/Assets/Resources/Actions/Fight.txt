@@ -1,3 +1,4 @@
 1
 2walk:5:left
 3MysteriousKnight
+6Victory:Defeat

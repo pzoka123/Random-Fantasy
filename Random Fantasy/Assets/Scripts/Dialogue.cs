@@ -61,11 +61,18 @@ public class Dialogue : MonoBehaviour
                     DialogueManager.dialogueManager.nextEvent = lines[j].Substring(1, lines[j].Length - 1);
                     GameLoop.gameLoop.eventPhase = true;
                     GameLoop.gameLoop.isEvent = true;
+                    Debug.Log("DEF");
                 }
                 else if (lines[j][0] == '5')
                 {
                     string[] sections = lines[j].Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
                     DiceBoardManager.diceBoardManager.dice += Convert.ToInt32(sections[1]);
+                }
+                else if (lines[j][0] == '6')
+                {
+                    string[] sections = lines[j].Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
+                    GameLoop.gameLoop.victoryText = sections[0].Substring(1, sections[0].Length - 1);
+                    GameLoop.gameLoop.defeatText = sections[1];
                 }
             }
             dialogues.Add(tempPart);

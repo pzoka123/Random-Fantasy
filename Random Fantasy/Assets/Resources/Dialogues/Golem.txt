@@ -7,3 +7,4 @@
 1Golem
 2Grrggg...Grgg..
 3GolemFight:combat
+6VictoryGolem:DefeatGolem

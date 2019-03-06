@@ -27,6 +27,9 @@ public class GameLoop : MonoBehaviour
     public bool isCombat = false;
     public bool isEnd = false;
 
+    public string victoryText;
+    public string defeatText;
+
     void Awake()
     {
         if (gameLoop == null)
@@ -168,11 +171,11 @@ public class GameLoop : MonoBehaviour
 
         if (ActionManager.actionManager.OtherChar.GetComponent<Character>().isDead)
         {
-            textFile = Resources.Load("Dialogues/Victory") as TextAsset;
+            textFile = Resources.Load("Dialogues/" + victoryText) as TextAsset;
         }
         else
         {
-            textFile = Resources.Load("Dialogues/Defeat") as TextAsset;
+            textFile = Resources.Load("Dialogues/" + defeatText) as TextAsset;
         }
 
         if (isAction)
@@ -188,6 +191,7 @@ public class GameLoop : MonoBehaviour
         while (isEnd)
         {
             Debug.Log("END");
+            FadeOut();
             yield return null;
         }
     }

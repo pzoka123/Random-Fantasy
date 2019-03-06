@@ -101,10 +101,12 @@ public class DialogueManager : MonoBehaviour
                 else if (combat)
                 {
                     GameLoop.gameLoop.isCombat = true;
+                    combat = false;
                 }
                 else if (action)
                 {
                     GameLoop.gameLoop.isAction = true;
+                    action = false;
                 }
                 currDialog = 0;
                 return;
