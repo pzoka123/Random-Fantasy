@@ -82,7 +82,6 @@ public class GameLoop : MonoBehaviour
 
     public IEnumerable DialogueState()
     {
-        //dialogueStart = true;
         gameObject.GetComponent<Dialogue>().ReadText(textFile);
 
         while (isDead)
@@ -147,6 +146,11 @@ public class GameLoop : MonoBehaviour
             gameState = EventState();
         else if (isCombat)
             gameState = CombatState();
+        else
+        {
+            isAction = true;
+            yield return null;
+        }
     }
 
     public IEnumerable CombatState()
@@ -162,14 +166,12 @@ public class GameLoop : MonoBehaviour
             yield return null;
         }
 
-        if (ActionManager.actionManager.otherChar.GetComponent<Character>().isDead)
+        if (ActionManager.actionManager.OtherChar.GetComponent<Character>().isDead)
         {
-            Debug.Log("Victory");
             textFile = Resources.Load("Dialogues/Victory") as TextAsset;
         }
         else
         {
-            Debug.Log("Defeat");
             textFile = Resources.Load("Dialogues/Defeat") as TextAsset;
         }
 
@@ -195,7 +197,7 @@ public class GameLoop : MonoBehaviour
         dark.GetComponent<Animator>().SetBool("fadeOut", true);
     }
 
-    public void FadeInt()
+    public void FadeIn()
     {
         dark.GetComponent<Animator>().SetBool("fadeOut", false);
     }
@@ -203,5 +205,6 @@ public class GameLoop : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        FadeIn();
     }
 }

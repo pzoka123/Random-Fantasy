@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 164366773}
   m_Layer: 0
   m_Name: Knight_2
-  m_TagString: Untagged
+  m_TagString: OtherChar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -407,8 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b60e0046cb7ba44ba243a9fe3a4b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkIn: 0
-  walkOut: 0
+  move: 0
   attack: 0
   die: 0
   isDead: 0
@@ -683,6 +682,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextAction: 
   nextEvent: 
+  combat: 0
+  end: 0
+  action: 0
 --- !u!4 &451861594
 Transform:
   m_ObjectHideFlags: 0
@@ -712,8 +714,11 @@ MonoBehaviour:
   textFile: {fileID: 0}
   dark: {fileID: 1007586761}
   darkVal: 0
+  startGame: 0
   eventPhase: 0
   isDead: 0
+  endScene: 0
+  nextScene: 
   isEvent: 0
   isDialogue: 0
   isAction: 0
@@ -781,8 +786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f339587897383cb4eac0c89a069098f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainChar: {fileID: 1118277480}
-  otherChar: {fileID: 164366768}
   nextDialogue: 0
   nextCombat: 0
 --- !u!1 &666150257
@@ -1885,7 +1888,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118277480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: -1.25, z: 95}
+  m_LocalPosition: {x: -12, y: -1.25, z: 95}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1903,8 +1906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b60e0046cb7ba44ba243a9fe3a4b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkIn: 0
-  walkOut: 0
+  move: 0
   attack: 0
   die: 0
   isDead: 0

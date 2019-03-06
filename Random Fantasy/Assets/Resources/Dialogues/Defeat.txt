@@ -1,4 +1,4 @@
 1
 2You are too weak against the spear of the mysterious knight.
 2Your life meets an end here.
-3Die
+3Die:end

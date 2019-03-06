@@ -8,9 +8,12 @@ public class ActionManager : MonoBehaviour
 {
     public static ActionManager actionManager { get; set; }
 
-    public GameObject mainChar;
-    public GameObject otherChar;
-    
+    GameObject mainChar;
+    public GameObject MainChar { get => mainChar; set => mainChar = value; }
+
+    GameObject otherChar;
+    public GameObject OtherChar { get => otherChar; set => otherChar = value; }
+
     string[] lines;
 
     public bool nextDialogue = false;
@@ -32,6 +35,13 @@ public class ActionManager : MonoBehaviour
     void Start()
     {
         mainChar = GameObject.FindGameObjectWithTag("Player");
+        otherChar = GameObject.FindGameObjectWithTag("OtherChar");
+    }
+
+    void Update()
+    {
+        mainChar = GameObject.FindGameObjectWithTag("Player");
+        otherChar = GameObject.FindGameObjectWithTag("OtherChar");
     }
 
     public void ReadText(TextAsset textFile)
@@ -47,30 +57,30 @@ public class ActionManager : MonoBehaviour
             {
                 if (sub == "walk")
                 {
-                    mainChar.GetComponent<Animator>().SetBool("walk", true);
-                    mainChar.GetComponent<Character>().move = true;
-                    mainChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
+                    MainChar.GetComponent<Animator>().SetBool("walk", true);
+                    MainChar.GetComponent<Character>().move = true;
+                    MainChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
                     if (sections[2] == "left")
                     {
-                        mainChar.GetComponent<SpriteRenderer>().flipX = true;
+                        MainChar.GetComponent<SpriteRenderer>().flipX = true;
                     }
                     else
                     {
-                        mainChar.GetComponent<SpriteRenderer>().flipX = false;
+                        MainChar.GetComponent<SpriteRenderer>().flipX = false;
                     }
                 }
                 else if (sub == "run")
                 {
-                    mainChar.GetComponent<Animator>().SetBool("run", true);
-                    mainChar.GetComponent<Character>().move = true;
-                    mainChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
+                    MainChar.GetComponent<Animator>().SetBool("run", true);
+                    MainChar.GetComponent<Character>().move = true;
+                    MainChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
                     if (sections[2] == "left")
                     {
-                        mainChar.GetComponent<SpriteRenderer>().flipX = true;
+                        MainChar.GetComponent<SpriteRenderer>().flipX = true;
                     }
                     else
                     {
-                        mainChar.GetComponent<SpriteRenderer>().flipX = false;
+                        MainChar.GetComponent<SpriteRenderer>().flipX = false;
                     }
                 }
             }
@@ -78,36 +88,41 @@ public class ActionManager : MonoBehaviour
             {
                 if (sub == "walk")
                 {
-                    otherChar.GetComponent<Animator>().SetBool("walk", true);
-                    otherChar.GetComponent<Character>().move = true;
-                    otherChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
+                    OtherChar.GetComponent<Animator>().SetBool("walk", true);
+                    OtherChar.GetComponent<Character>().move = true;
+                    OtherChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
                     if (sections[2] == "left")
                     {
-                        otherChar.GetComponent<SpriteRenderer>().flipX = true;
+                        OtherChar.GetComponent<SpriteRenderer>().flipX = true;
                     }
                     else
                     {
-                        otherChar.GetComponent<SpriteRenderer>().flipX = false;
+                        OtherChar.GetComponent<SpriteRenderer>().flipX = false;
                     }
                 }
                 else if (sub == "run")
                 {
-                    otherChar.GetComponent<Animator>().SetBool("run", true);
-                    otherChar.GetComponent<Character>().move = true;
-                    otherChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
+                    OtherChar.GetComponent<Animator>().SetBool("run", true);
+                    OtherChar.GetComponent<Character>().move = true;
+                    OtherChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
                     if (sections[2] == "left")
                     {
-                        otherChar.GetComponent<SpriteRenderer>().flipX = true;
+                        OtherChar.GetComponent<SpriteRenderer>().flipX = true;
                     }
                     else
                     {
-                        otherChar.GetComponent<SpriteRenderer>().flipX = false;
+                        OtherChar.GetComponent<SpriteRenderer>().flipX = false;
                     }
                 }
             }
             else if (lines[i][0] == '3')
             {
                 GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + sub) as TextAsset;
+                //if (sections[1] == "event")
+                //{
+                //    GameLoop.gameLoop.isEvent = true;
+                //    GameLoop.gameLoop.eventPhase = true;
+                //}
                 nextDialogue = true;
             }
             else if (lines[i][0] == '4')
@@ -121,6 +136,8 @@ public class ActionManager : MonoBehaviour
             {
                 GameLoop.gameLoop.endScene = true;
                 GameLoop.gameLoop.nextScene = sub;
+                GameLoop.gameLoop.isAction = true;
+                DialogueManager.dialogueManager.nextAction = sections[1];
                 //GameLoop.gameLoop.FadeOut();
                 //GameLoop.gameLoop.LoadScene(sub);
             }
@@ -129,15 +146,18 @@ public class ActionManager : MonoBehaviour
 
     public void Move()
     {
-        mainChar.GetComponent<Character>().CharMove();
-        otherChar.GetComponent<Character>().CharMove();
+        MainChar.GetComponent<Character>().CharMove();
+        OtherChar.GetComponent<Character>().CharMove();
         
-        if (!mainChar.GetComponent<Character>().move && !otherChar.GetComponent<Character>().move)
+        if (!MainChar.GetComponent<Character>().move && !OtherChar.GetComponent<Character>().move)
         {
             if (nextDialogue)
             {
                 GameLoop.gameLoop.isAction = false;
-                GameLoop.gameLoop.isDialogue = true;
+                if (!GameLoop.gameLoop.endScene)
+                    GameLoop.gameLoop.isDialogue = true;
+                else
+                    GameLoop.gameLoop.isDialogue = false;
                 nextDialogue = false;
             }
         }
@@ -145,7 +165,7 @@ public class ActionManager : MonoBehaviour
 
     public void AttackMain()
     {
-        mainChar.GetComponent<Character>().CharAttack(otherChar);
+        MainChar.GetComponent<Character>().CharAttack(OtherChar);
         //if (!otherChar.GetComponent<Character>().walkIn)
         //{
         //    if (nextDialogue)
@@ -158,7 +178,7 @@ public class ActionManager : MonoBehaviour
 
     public void AttackOther()
     {
-        otherChar.GetComponent<Character>().CharAttack(mainChar);
+        OtherChar.GetComponent<Character>().CharAttack(MainChar);
         //if (!otherChar.GetComponent<Character>().walkIn)
         //{
         //    if (nextDialogue)
@@ -171,8 +191,8 @@ public class ActionManager : MonoBehaviour
 
     public void Die()
     {
-        mainChar.GetComponent<Character>().CharDie();
-        otherChar.GetComponent<Character>().CharDie();
+        MainChar.GetComponent<Character>().CharDie();
+        OtherChar.GetComponent<Character>().CharDie();
     }
 
     public void NextDialogue()

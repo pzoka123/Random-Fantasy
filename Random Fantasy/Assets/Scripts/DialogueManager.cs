@@ -82,17 +82,20 @@ public class DialogueManager : MonoBehaviour
                 GameLoop.gameLoop.isDialogue = false;
                 if (GameLoop.gameLoop.eventPhase)
                 {
-                    if (EventManager.eventManager.currClicked.tag == "EventCard")
+                    if (EventManager.eventManager.currClicked != null)
                     {
-                        GameLoop.gameLoop.isEvent = true;
-                        EventManager.eventManager.ShowChoice();
-                        EventManager.eventManager.ReturnEvent();
-                    }
-                    else if (EventManager.eventManager.currClicked.tag == "ChoiceCard")
-                    {
-                        GameLoop.gameLoop.isAction = true;
-                        EventManager.eventManager.ReturnChoice();
-                        GameLoop.gameLoop.eventPhase = false;
+                        if (EventManager.eventManager.currClicked.tag == "EventCard")
+                        {
+                            GameLoop.gameLoop.isEvent = true;
+                            EventManager.eventManager.ShowChoice();
+                            EventManager.eventManager.ReturnEvent();
+                        }
+                        else if (EventManager.eventManager.currClicked.tag == "ChoiceCard")
+                        {
+                            GameLoop.gameLoop.isAction = true;
+                            EventManager.eventManager.ReturnChoice();
+                            GameLoop.gameLoop.eventPhase = false;
+                        }
                     }
                 }
                 else if (combat)

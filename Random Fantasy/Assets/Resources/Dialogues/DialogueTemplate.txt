@@ -1,0 +1,8 @@
+1<Name>
+2<Lines>
+
+1<Name>
+2<Lines>
+3<action>:<phase (combat, end, event, etc.)>
+4<event (dialogue)>
+5dice:<dice num>

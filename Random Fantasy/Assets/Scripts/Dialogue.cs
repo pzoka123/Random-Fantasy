@@ -16,7 +16,6 @@ public class Dialogue : MonoBehaviour
     public void ReadText(TextAsset textFile)
     {
         DialogueManager.dialogueManager.dialogues.Clear();
-
         parts = textFile.text.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
         for (int i = 0; i < parts.Length; i++)
@@ -60,6 +59,8 @@ public class Dialogue : MonoBehaviour
                 else if (lines[j][0] == '4')
                 {
                     DialogueManager.dialogueManager.nextEvent = lines[j].Substring(1, lines[j].Length - 1);
+                    GameLoop.gameLoop.eventPhase = true;
+                    GameLoop.gameLoop.isEvent = true;
                 }
                 else if (lines[j][0] == '5')
                 {

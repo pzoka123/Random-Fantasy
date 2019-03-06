@@ -17,6 +17,7 @@ TagManager:
   - RollButton
   - EventBoard
   - Positions
+  - OtherChar
   layers:
   - Default
   - TransparentFX

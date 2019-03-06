@@ -1,0 +1,5 @@
+1<mainChar movement>:<position>:<direction>
+2<otherChar movement>:<position>:<direction>
+3<dialogue>
+4<status> (currently only have isDead)
+5<scene to change to>:<dialogue>

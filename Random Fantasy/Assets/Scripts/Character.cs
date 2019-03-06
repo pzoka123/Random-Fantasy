@@ -72,6 +72,8 @@ public class Character : MonoBehaviour
                 anim.SetBool("run", false);
                 anim.SetBool("attack", true);
                 attack = false;
+                lerpValue = 0;
+                startPos = transform.position;
             }
         }
     }
@@ -94,11 +96,11 @@ public class Character : MonoBehaviour
     {
         if (gameObject.tag == "Player" && anim.GetBool("attack"))
         {
-            ActionManager.actionManager.otherChar.GetComponent<Character>().die = true;
+            ActionManager.actionManager.OtherChar.GetComponent<Character>().die = true;
         }
         else
         {
-            ActionManager.actionManager.mainChar.GetComponent<Character>().die = true;
+            ActionManager.actionManager.MainChar.GetComponent<Character>().die = true;
         }
         anim.SetBool("attack", false);
         ActionManager.actionManager.nextDialogue = true;

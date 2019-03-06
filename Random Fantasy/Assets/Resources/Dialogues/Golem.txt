@@ -1,0 +1,9 @@
+1Golem
+2Grr...Grggg..
+
+1Golden Knight
+2Found you, monster. Today, you'll fall by my hand.
+
+1Golem
+2Grrggg...Grgg..
+3GolemFight:combat

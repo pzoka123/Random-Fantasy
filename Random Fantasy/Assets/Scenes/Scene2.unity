@@ -1663,7 +1663,7 @@ GameObject:
   - component: {fileID: 1180524910}
   m_Layer: 0
   m_Name: Seller
-  m_TagString: Untagged
+  m_TagString: OtherChar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1872,7 +1872,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f339587897383cb4eac0c89a069098f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainChar: {fileID: 1489784010}
   otherChar: {fileID: 1180524906}
   nextDialogue: 0
   nextCombat: 0
