@@ -381,6 +381,7 @@ GameObject:
   - component: {fileID: 868128273}
   - component: {fileID: 868128272}
   - component: {fileID: 868128271}
+  - component: {fileID: 868128274}
   m_Layer: 0
   m_Name: WeaponSmith
   m_TagString: OtherChar
@@ -463,12 +464,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868128270}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: -0.6, z: 0}
+  m_LocalPosition: {x: 6, y: -0.6, z: 94}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &868128274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868128270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b60e0046cb7ba44ba243a9fe3a4b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move: 0
+  attack: 0
+  die: 0
+  isDead: 0
+  posNum: 0
 --- !u!1 &1065406777
 GameObject:
   m_ObjectHideFlags: 0

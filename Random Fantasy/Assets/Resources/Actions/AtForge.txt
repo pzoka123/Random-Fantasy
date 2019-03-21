@@ -1,2 +1,3 @@
 1walk:1:right
-3BlacksmithWelcome
+3BlacksmithWelcome:inventory:GuildMasterMessage:0:BlacksmithWelcome
+3UnfinishedDelivery:inventory:GuildMasterMessage:1:BlacksmithWelcome

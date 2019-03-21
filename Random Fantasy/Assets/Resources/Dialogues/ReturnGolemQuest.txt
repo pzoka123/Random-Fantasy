@@ -9,4 +9,5 @@
 
 1
 2[You received the Power Sword from the Blacksmith]
+3Deliver:action
 7inventory:PowerSword:1

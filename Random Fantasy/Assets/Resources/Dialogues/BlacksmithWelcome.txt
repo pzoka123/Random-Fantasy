@@ -1,5 +1,4 @@
 1Blacksmith
 2Welcome to our forge.
 2Here we have all kinds of weapons and armors that you need.
-2Take a look around.
-3MeetTheBlacksmith
+3MeetTheBlacksmith:action

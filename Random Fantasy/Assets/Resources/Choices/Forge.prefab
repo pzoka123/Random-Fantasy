@@ -78,7 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: The Blacksmith
+  m_Text: The Forge
 --- !u!1 &7548767593176592213
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5544328337291440213}
   - component: {fileID: 5141278881296049929}
   m_Layer: 5
-  m_Name: Blacksmith
+  m_Name: Forge
   m_TagString: ChoiceCard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PotionStore.unity
     guid: 8069547a55c7b72429b586a93e9dd6d7
+  - enabled: 1
+    path: Assets/Scenes/Forge.unity
+    guid: fa583bde07a9bca4d95dba35f46287de
+  - enabled: 1
+    path: Assets/Scenes/StoneRuin.unity
+    guid: 401693e38dc77ee4e90b4d9804eefa30
   m_configObjects: {}

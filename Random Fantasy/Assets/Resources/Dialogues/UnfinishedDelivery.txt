@@ -1,0 +1,4 @@
+1Blacksmith
+2Have you delivered the message for me yet?
+2If not, then come back when you have done it.
+3BackToTown:action

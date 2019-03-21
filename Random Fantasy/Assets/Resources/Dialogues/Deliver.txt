@@ -1,0 +1,17 @@
+1Blacksmith
+2While you are here, may I ask you for a favor?
+
+1Adventurer
+2What do you need of me?
+
+1Blacksmith
+2As you may have known, we have an adventurer guild in our town.
+2I have an important message that needs to be delivered to the guild master.
+2However, he has not been in town for a while, and I am too busy with this shop to go look for him.
+2Can you find out more information on his whereabout and deliver this message to him for me?
+2As a reward, I will give you a special weapon when you finish the job.
+
+1Adventurer
+2Just leave it to me. I will make sure the guild master receives this message.
+3BackToTown:action
+7inventory:GuildMasterMessage:1

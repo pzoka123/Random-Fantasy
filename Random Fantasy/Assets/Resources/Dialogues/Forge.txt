@@ -1,4 +1,4 @@
 1Adventurer
-2Let's visit the forge and see what the renown blacksmith has in store for me.
+2Let's visit the forge and see what the blacksmith has in store for me.
 2Always feel good to have good armor and weapons.
 3GoToForge:action

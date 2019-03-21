@@ -6,6 +6,14 @@ public class CanvasScript : MonoBehaviour
 {
     void Awake()
     {
+        //if (GameObject.Find("Canvas") == null)
+        //{
+        //    DontDestroyOnLoad(gameObject);
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
         DontDestroyOnLoad(gameObject);
     }
 

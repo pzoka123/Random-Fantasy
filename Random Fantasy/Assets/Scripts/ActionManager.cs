@@ -134,7 +134,10 @@ public class ActionManager : MonoBehaviour
                                 if (MainChar.mainChar.Inventory[sections[2]] >= Convert.ToInt32(sections[3]))
                                 {
                                     GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + sub) as TextAsset;
-                                    required = true;
+                                }
+                                else
+                                {
+                                    GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + sections[4]) as TextAsset;
                                 }
                             }
                             else
@@ -147,7 +150,6 @@ public class ActionManager : MonoBehaviour
                             if (Status.status.EnvStatus[sections[2]] >= Convert.ToInt32(sections[3]))
                             {
                                 GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + sub) as TextAsset;
-                                required = true;
                             }
                             else
                             {
