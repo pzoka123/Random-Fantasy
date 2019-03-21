@@ -1,0 +1,3 @@
+1walk:1:right
+2walk:5:left
+3GolemQuest

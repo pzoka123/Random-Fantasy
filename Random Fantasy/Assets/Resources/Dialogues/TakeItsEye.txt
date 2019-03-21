@@ -4,3 +4,4 @@
 1
 2You promptly took out one of the stone eye and put it in your inventory.
 3GoBack:action
+7inventory:GolemsEyes:1

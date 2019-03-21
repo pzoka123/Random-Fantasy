@@ -4,3 +4,4 @@
 1
 2You pick up the heavy stone head with all your might and carry it back.
 3GoBack:action
+7inventory:GolemsHead:1

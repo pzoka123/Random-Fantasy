@@ -1,0 +1,14 @@
+1Potion Keeper
+2Welcome, adventurer.
+2As thanks for saving me, here is a magic potion.
+
+1
+2[You receive a magic potion from the shopkeeper.]
+
+1Potion Keeper
+2This is a very potent potion. It can cure every disease known to man.
+2However, remember that it cannot cure you from demon's curses.
+
+3PurchasePotion:action
+
+7inventory:StrengthPotion_HighQuality:1

@@ -10,7 +10,15 @@ public class Character : MonoBehaviour
     public bool die;
     public bool isDead;
 
-    GameObject positions;
+    Vector3[] positions = {
+        new Vector3(-12,0,0),
+        new Vector3(-6,0,0),
+        new Vector3(-3,0,0),
+        new Vector3(0,0,0),
+        new Vector3(3,0,0),
+        new Vector3(6,0,0),
+        new Vector3(12,0,0)
+    };
     public int posNum;
 
     Animator anim;
@@ -22,8 +30,6 @@ public class Character : MonoBehaviour
 
     void Awake()
     {
-        positions = GameObject.FindGameObjectWithTag("Positions");
-
         anim = gameObject.GetComponent<Animator>();
         startPos = transform.position;
         endPos = Vector3.zero;
@@ -45,7 +51,7 @@ public class Character : MonoBehaviour
     {
         if (move)
         {
-            endPos = new Vector3(positions.transform.GetChild(posNum).transform.position.x, transform.position.y, transform.position.z);
+            endPos = new Vector3(positions[posNum].x, transform.position.y, transform.position.z);
             lerpValue += Time.deltaTime / speed;
             transform.position = Vector3.Lerp(startPos, endPos, lerpValue);
             if (transform.position == endPos)
@@ -96,11 +102,11 @@ public class Character : MonoBehaviour
     {
         if (gameObject.tag == "Player" && anim.GetBool("attack"))
         {
-            ActionManager.actionManager.OtherChar.GetComponent<Character>().die = true;
+            ActionManager.actionManager.OtherCharacter.GetComponent<Character>().die = true;
         }
         else
         {
-            ActionManager.actionManager.MainChar.GetComponent<Character>().die = true;
+            ActionManager.actionManager.MainCharacter.GetComponent<Character>().die = true;
         }
         anim.SetBool("attack", false);
         ActionManager.actionManager.nextDialogue = true;

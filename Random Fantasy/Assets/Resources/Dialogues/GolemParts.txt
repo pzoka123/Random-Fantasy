@@ -1,3 +1,3 @@
 1Golden Knight
 2What should I bring back with me?
-4GolemParts
+4GolemParts:TakeItsEye:TakeItsArm:TakeItsHead

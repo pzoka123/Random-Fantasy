@@ -1,0 +1,10 @@
+1Golem
+2Grr...Grggg..
+
+1Adventurer
+2Found you, golem. Your gem is mine.
+
+1Golem
+2Grrggg...Grgg..
+3GolemFight:combat
+6VictoryGolem:DefeatGolem

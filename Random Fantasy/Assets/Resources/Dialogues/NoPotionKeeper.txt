@@ -1,0 +1,4 @@
+1Adventurer
+2Hm... The shop keeper is not here.
+2I wonder where he went.
+3BackToTown:action

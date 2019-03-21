@@ -1,0 +1,11 @@
+1Golden Knight
+2Here's the head of the golem.
+2I believe this much is more than enough for your potion.
+
+1Shopkeeper
+2Magnificent. This is plentiful, indeed.
+2Here is your promised magic potion.
+
+1
+2[You receive a potion from the shopkeeper.]
+7inventory:StrengthPotion_HighQuality:1

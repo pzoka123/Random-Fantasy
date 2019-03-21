@@ -1,0 +1,2 @@
+1walk:1:right
+3PotionKeeper:envStatus:ShopKeeper:1:NoPotionKeeper

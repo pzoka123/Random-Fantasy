@@ -1,2 +1,3 @@
 1walk:0:left
-5Scene2:Shop
+3
+5Scene2:ReturnGolemPart

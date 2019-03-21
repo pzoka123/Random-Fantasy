@@ -1,0 +1,12 @@
+1Blacksmith
+2I assume you have successfully retrieved the gem.
+
+1Adventurer
+2I have it right here. It's nothing much.
+
+1Blacksmith
+2Very well. As promised, the sword is yours, free of charge.
+
+1
+2[You received the Power Sword from the Blacksmith]
+7inventory:PowerSword:1

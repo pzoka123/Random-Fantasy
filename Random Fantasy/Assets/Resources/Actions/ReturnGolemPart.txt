@@ -1,0 +1,4 @@
+1walk:1:right
+3ReturnHead:inventory:GolemsHead:1:ReturnFail
+3ReturnEye:inventory:GolemsEye:1:ReturnFail
+3ReturnArm:inventory:GolemsArm:1:ReturnFail

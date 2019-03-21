@@ -8,4 +8,9 @@ public class CanvasScript : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
+
+    void Update()
+    {
+        gameObject.GetComponent<Canvas>().worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+    }
 }

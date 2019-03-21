@@ -1,2 +1,2 @@
 3
-6VictoryGolem:DefeatGolem
+6VictoryGolemDemo:DefeatGolem

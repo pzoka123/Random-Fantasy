@@ -1,0 +1,3 @@
+1walk:6:right
+3
+5PotionStore:AtPotionStore

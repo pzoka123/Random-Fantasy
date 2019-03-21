@@ -1,0 +1,4 @@
+1Golden Knight
+2This is so much easier than I thought.
+2Now what should I bring back with me?
+4GolemParts:TakeItsEye:TakeItsArm:TakeItsHead

@@ -1,4 +1,7 @@
-1Golden Knight
-2This is so much easier than I thought.
-2Now what should I bring back with me?
-4GolemParts
+1
+2[You found Power Gem in the remains of the golem.]
+
+1Adventurer
+2That was easier than I thought.
+2Better go back for the sword.
+3BackToForge:action

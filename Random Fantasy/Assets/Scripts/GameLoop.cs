@@ -117,7 +117,7 @@ public class GameLoop : MonoBehaviour
     {
         if (startGame)
         {
-            textFile = Resources.Load("Starts/Seller") as TextAsset;
+            textFile = Resources.Load("Starts/TownStart") as TextAsset;
             startGame = false;
         }
         else
@@ -169,7 +169,7 @@ public class GameLoop : MonoBehaviour
             yield return null;
         }
 
-        if (ActionManager.actionManager.OtherChar.GetComponent<Character>().isDead)
+        if (ActionManager.actionManager.OtherCharacter.GetComponent<Character>().isDead)
         {
             textFile = Resources.Load("Dialogues/" + victoryText) as TextAsset;
         }

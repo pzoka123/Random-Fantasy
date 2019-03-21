@@ -1,0 +1,10 @@
+1Golden Knight
+2Here's the eye of the golem. Now give me the potion.
+
+1Shopkeeper
+2Interesting. Despite its ugly appearance, the golem does have a beautiful gemstone as its eye.
+2Very well. Here is your promised magic potion.
+
+1
+2[You receive a potion from the shopkeeper.]
+7inventory:StrengthPotion_HighQuality:1

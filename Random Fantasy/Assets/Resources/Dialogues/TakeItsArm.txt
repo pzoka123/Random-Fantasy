@@ -4,3 +4,4 @@
 1
 2You pick up one of its stone arm and bring it back in your hand.
 3GoBack:action
+7inventory:GolemsArm:1

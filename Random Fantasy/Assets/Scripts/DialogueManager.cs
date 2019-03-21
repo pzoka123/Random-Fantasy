@@ -94,6 +94,7 @@ public class DialogueManager : MonoBehaviour
                         {
                             GameLoop.gameLoop.isAction = true;
                             EventManager.eventManager.ReturnChoice();
+                            EventManager.eventManager.Hide();
                             GameLoop.gameLoop.eventPhase = false;
                         }
                     }

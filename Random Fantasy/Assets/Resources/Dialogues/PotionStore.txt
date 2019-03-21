@@ -1,0 +1,4 @@
+1Adventurer
+2I'd better check out the potion store.
+2There may be some interesting stuffs I can get.
+3GoToPotionStore:action

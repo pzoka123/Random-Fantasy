@@ -8,16 +8,18 @@ public class ActionManager : MonoBehaviour
 {
     public static ActionManager actionManager { get; set; }
 
-    GameObject mainChar;
-    public GameObject MainChar { get => mainChar; set => mainChar = value; }
+    GameObject mainCharacter;
+    public GameObject MainCharacter { get => mainCharacter; set => mainCharacter = value; }
 
-    GameObject otherChar;
-    public GameObject OtherChar { get => otherChar; set => otherChar = value; }
+    GameObject otherCharacter;
+    public GameObject OtherCharacter { get => otherCharacter; set => otherCharacter = value; }
 
     string[] lines;
 
     public bool nextDialogue = false;
     public bool nextCombat = false;
+
+    bool required = false;
 
     void Awake()
     {
@@ -34,14 +36,14 @@ public class ActionManager : MonoBehaviour
 
     void Start()
     {
-        mainChar = GameObject.FindGameObjectWithTag("Player");
-        otherChar = GameObject.FindGameObjectWithTag("OtherChar");
+        mainCharacter = GameObject.FindGameObjectWithTag("Player");
+        otherCharacter = GameObject.FindGameObjectWithTag("OtherChar");
     }
 
     void Update()
     {
-        mainChar = GameObject.FindGameObjectWithTag("Player");
-        otherChar = GameObject.FindGameObjectWithTag("OtherChar");
+        mainCharacter = GameObject.FindGameObjectWithTag("Player");
+        otherCharacter = GameObject.FindGameObjectWithTag("OtherChar");
     }
 
     public void ReadText(TextAsset textFile)
@@ -57,30 +59,30 @@ public class ActionManager : MonoBehaviour
             {
                 if (sub == "walk")
                 {
-                    MainChar.GetComponent<Animator>().SetBool("walk", true);
-                    MainChar.GetComponent<Character>().move = true;
-                    MainChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
+                    MainCharacter.GetComponent<Animator>().SetBool("walk", true);
+                    MainCharacter.GetComponent<Character>().move = true;
+                    MainCharacter.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
                     if (sections[2] == "left")
                     {
-                        MainChar.GetComponent<SpriteRenderer>().flipX = true;
+                        MainCharacter.GetComponent<SpriteRenderer>().flipX = true;
                     }
                     else
                     {
-                        MainChar.GetComponent<SpriteRenderer>().flipX = false;
+                        MainCharacter.GetComponent<SpriteRenderer>().flipX = false;
                     }
                 }
                 else if (sub == "run")
                 {
-                    MainChar.GetComponent<Animator>().SetBool("run", true);
-                    MainChar.GetComponent<Character>().move = true;
-                    MainChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
+                    MainCharacter.GetComponent<Animator>().SetBool("run", true);
+                    MainCharacter.GetComponent<Character>().move = true;
+                    MainCharacter.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
                     if (sections[2] == "left")
                     {
-                        MainChar.GetComponent<SpriteRenderer>().flipX = true;
+                        MainCharacter.GetComponent<SpriteRenderer>().flipX = true;
                     }
                     else
                     {
-                        MainChar.GetComponent<SpriteRenderer>().flipX = false;
+                        MainCharacter.GetComponent<SpriteRenderer>().flipX = false;
                     }
                 }
             }
@@ -88,41 +90,72 @@ public class ActionManager : MonoBehaviour
             {
                 if (sub == "walk")
                 {
-                    OtherChar.GetComponent<Animator>().SetBool("walk", true);
-                    OtherChar.GetComponent<Character>().move = true;
-                    OtherChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
+                    OtherCharacter.GetComponent<Animator>().SetBool("walk", true);
+                    OtherCharacter.GetComponent<Character>().move = true;
+                    OtherCharacter.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
                     if (sections[2] == "left")
                     {
-                        OtherChar.GetComponent<SpriteRenderer>().flipX = true;
+                        OtherCharacter.GetComponent<SpriteRenderer>().flipX = true;
                     }
                     else
                     {
-                        OtherChar.GetComponent<SpriteRenderer>().flipX = false;
+                        OtherCharacter.GetComponent<SpriteRenderer>().flipX = false;
                     }
                 }
                 else if (sub == "run")
                 {
-                    OtherChar.GetComponent<Animator>().SetBool("run", true);
-                    OtherChar.GetComponent<Character>().move = true;
-                    OtherChar.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
+                    OtherCharacter.GetComponent<Animator>().SetBool("run", true);
+                    OtherCharacter.GetComponent<Character>().move = true;
+                    OtherCharacter.GetComponent<Character>().posNum = Convert.ToInt32(sections[1]);
                     if (sections[2] == "left")
                     {
-                        OtherChar.GetComponent<SpriteRenderer>().flipX = true;
+                        OtherCharacter.GetComponent<SpriteRenderer>().flipX = true;
                     }
                     else
                     {
-                        OtherChar.GetComponent<SpriteRenderer>().flipX = false;
+                        OtherCharacter.GetComponent<SpriteRenderer>().flipX = false;
                     }
                 }
             }
             else if (lines[i][0] == '3')
             {
-                GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + sub) as TextAsset;
-                //if (sections[1] == "event")
-                //{
-                //    GameLoop.gameLoop.isEvent = true;
-                //    GameLoop.gameLoop.eventPhase = true;
-                //}
+                if (sections.Length <= 1)
+                {
+                    GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + sub) as TextAsset;
+                }
+                else
+                {
+                    if (required == false)
+                    {
+                        if (sections[1] == "inventory")
+                        {
+                            if (MainChar.mainChar.Inventory.ContainsKey(sections[2]))
+                            {
+                                if (MainChar.mainChar.Inventory[sections[2]] >= Convert.ToInt32(sections[3]))
+                                {
+                                    GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + sub) as TextAsset;
+                                    required = true;
+                                }
+                            }
+                            else
+                            {
+                                GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + sections[4]) as TextAsset;
+                            }
+                        }
+                        else if (sections[1] == "envStatus")
+                        {
+                            if (Status.status.EnvStatus[sections[2]] >= Convert.ToInt32(sections[3]))
+                            {
+                                GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + sub) as TextAsset;
+                                required = true;
+                            }
+                            else
+                            {
+                                GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + sections[4]) as TextAsset;
+                            }
+                        }
+                    }
+                }
                 nextDialogue = true;
             }
             else if (lines[i][0] == '4')
@@ -138,8 +171,6 @@ public class ActionManager : MonoBehaviour
                 GameLoop.gameLoop.nextScene = sub;
                 GameLoop.gameLoop.isAction = true;
                 DialogueManager.dialogueManager.nextAction = sections[1];
-                //GameLoop.gameLoop.FadeOut();
-                //GameLoop.gameLoop.LoadScene(sub);
             }
             else if (lines[i][0] == '6')
             {
@@ -151,10 +182,10 @@ public class ActionManager : MonoBehaviour
 
     public void Move()
     {
-        MainChar.GetComponent<Character>().CharMove();
-        OtherChar.GetComponent<Character>().CharMove();
+        MainCharacter.GetComponent<Character>().CharMove();
+        OtherCharacter.GetComponent<Character>().CharMove();
         
-        if (!MainChar.GetComponent<Character>().move && !OtherChar.GetComponent<Character>().move)
+        if (!MainCharacter.GetComponent<Character>().move && !OtherCharacter.GetComponent<Character>().move)
         {
             if (nextDialogue)
             {
@@ -170,7 +201,7 @@ public class ActionManager : MonoBehaviour
 
     public void AttackMain()
     {
-        MainChar.GetComponent<Character>().CharAttack(OtherChar);
+        MainCharacter.GetComponent<Character>().CharAttack(OtherCharacter);
         //if (!otherChar.GetComponent<Character>().walkIn)
         //{
         //    if (nextDialogue)
@@ -183,7 +214,7 @@ public class ActionManager : MonoBehaviour
 
     public void AttackOther()
     {
-        OtherChar.GetComponent<Character>().CharAttack(MainChar);
+        OtherCharacter.GetComponent<Character>().CharAttack(MainCharacter);
         //if (!otherChar.GetComponent<Character>().walkIn)
         //{
         //    if (nextDialogue)
@@ -196,8 +227,8 @@ public class ActionManager : MonoBehaviour
 
     public void Die()
     {
-        MainChar.GetComponent<Character>().CharDie();
-        OtherChar.GetComponent<Character>().CharDie();
+        MainCharacter.GetComponent<Character>().CharDie();
+        OtherCharacter.GetComponent<Character>().CharDie();
     }
 
     public void NextDialogue()

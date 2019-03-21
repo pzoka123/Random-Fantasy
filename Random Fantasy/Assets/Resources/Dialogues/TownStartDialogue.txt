@@ -1,0 +1,6 @@
+1
+2Welcome to the town of Ortus, the town of beginning.
+2As an adventurer, you might want to check out the adventurer guild.
+2Or you can supply yourself with some potions.
+2You may also purchase some gears and equipment from our renown blacksmith.
+3Town:action

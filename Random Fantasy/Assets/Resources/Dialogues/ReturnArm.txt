@@ -1,0 +1,11 @@
+1Golden Knight
+2Here's the arm of the golem.
+2The whole thing is way too big for me to carry all the way back here.
+
+1Shopkeeper
+2And you decided to bring back just a puny arm?
+2Pathetic. Here. Take this and leave.
+
+1
+2[You receive a potion from the shopkeeper.]
+7inventory:StrengthPotion_LowQuality:1

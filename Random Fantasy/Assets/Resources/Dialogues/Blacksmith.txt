@@ -1,0 +1,3 @@
+1Blacksmith
+2What do ya need, friend?
+4Blacksmith:Weapon:Deliver:FightBlacksmith

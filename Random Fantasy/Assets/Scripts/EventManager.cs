@@ -56,11 +56,13 @@ public class EventManager : MonoBehaviour
 
     public void ReturnEvent()
     {
+        eventCard = GameObject.FindGameObjectWithTag("EventCard");
         eventCard.GetComponent<Animator>().SetBool("isActive", false);
     }
 
     public void HideEvent()
     {
+        eventCard = GameObject.FindGameObjectWithTag("EventCard");
         eventCard.GetComponent<Image>().enabled = false;
         eventCard.transform.GetChild(0).GetComponent<Image>().enabled = false;
         eventCard.GetComponentInChildren<Text>().enabled = false;
@@ -68,6 +70,7 @@ public class EventManager : MonoBehaviour
 
     public void ShowChoice()
     {
+        choiceCards = GameObject.FindGameObjectsWithTag("ChoiceCard");
         foreach (GameObject card in choiceCards)
         {
             card.GetComponent<Image>().enabled = true;
@@ -82,10 +85,17 @@ public class EventManager : MonoBehaviour
         currClicked.GetComponent<Image>().enabled = false;
         currClicked.GetComponent<Button>().enabled = false;
         currClicked.GetComponentInChildren<Text>().enabled = false;
+
+        Destroy(eventCard);
+        foreach (GameObject card in choiceCards)
+        {
+            Destroy(card);
+        }
     }
 
     public void HideChoice()
     {
+        choiceCards = GameObject.FindGameObjectsWithTag("ChoiceCard");
         foreach (GameObject card in choiceCards)
         {
             if (card != currClicked)
