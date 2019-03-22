@@ -1,0 +1,17 @@
+{
+	"convo":[
+		{"Player": [
+			"Sentence number 1",
+			"Sentence number 2"
+		]},
+		{"Enemy": [
+			"Sentence number 3",
+			"Sentence number 4"
+		]},
+		{"Player": [
+			"Sentence number 5",
+			"Sentence number 6"
+		]}
+	],
+	"next action":""
+}

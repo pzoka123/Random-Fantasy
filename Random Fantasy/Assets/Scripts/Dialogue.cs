@@ -37,7 +37,8 @@ public class Dialogue : MonoBehaviour
                 }
                 else if (lines[j][0] == '3')
                 {
-                    DialogueManager.dialogueManager.nextAction = sections[0].Substring(1, sections[0].Length - 1);
+                    DialogueManager.dialogueManager.
+                        nextAction = sections[0].Substring(1, sections[0].Length - 1);
                     if (sections[1] == "combat")
                     {
                         DialogueManager.dialogueManager.combat = true;
