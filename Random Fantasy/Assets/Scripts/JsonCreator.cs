@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class JsonCreator : MonoBehaviour
+public static class JsonCreator
 {
 
     // Start is called before the first frame update
-    void Start()
-    {
-        //Test reading Event Json
-        string eventJson = File.ReadAllText(Application.dataPath + "/JSON/testEventJson.json");
-        EventData loadedEventData = JsonUtility.FromJson<EventData>(eventJson);
+    //static void Start()
+    //{
+    //    //Test reading Event Json
+    //    string eventJson = File.ReadAllText(Application.dataPath + "/JSON/testEventJson.json");
+    //    EventData loadedEventData = JsonUtility.FromJson<EventData>(eventJson);
+    //
+    //    //Test reading Dialogue Json
+    //    string dialogueJson = File.ReadAllText(Application.dataPath + "/JSON/testDialogueJson.json");
+    //    DialogueData loadedDialogueData = JsonUtility.FromJson<DialogueData>(dialogueJson);
+    //}
 
-        //Test reading Dialogue Json
-        string dialogueJson = File.ReadAllText(Application.dataPath + "/JSON/testDialogueJson.json");
-        DialogueData loadedDialogueData = JsonUtility.FromJson<DialogueData>(dialogueJson);
-    }
-
-    class EventData
+    public class EventData
     {
         public string eventName;
         public string[] eventDesc;
@@ -68,7 +68,7 @@ public class JsonCreator : MonoBehaviour
         }
     }
 
-    class ChoiceData
+    public class ChoiceData
     {
         public string choiceName;
         public string[] choiceDesc;
@@ -86,7 +86,7 @@ public class JsonCreator : MonoBehaviour
         }
     }
 
-    class DialogueData
+    public class DialogueData
     {
         public IList<Dialogue> dialogue;
         public string next;
@@ -147,7 +147,7 @@ public class JsonCreator : MonoBehaviour
         }
     }
 
-    class Dialogue
+    public class Dialogue
     {
         public string name;
         public string[] sentences;

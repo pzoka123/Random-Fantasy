@@ -9,7 +9,7 @@ public class GameLoop : MonoBehaviour
     public IEnumerable gameState;
 
     public TextAsset textFile;
-
+    
     public GameObject dark;
     public float darkVal = 0;
 

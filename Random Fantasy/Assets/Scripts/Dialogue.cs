@@ -33,7 +33,7 @@ public class Dialogue : MonoBehaviour
                 }
                 else if (lines[j][0] == '2')
                 {
-                    tempPart.dialogSentence += "_" + lines[j].Substring(1, lines[j].Length - 1);
+                    tempPart.dialogSentences += "_" + lines[j].Substring(1, lines[j].Length - 1);
                 }
                 else if (lines[j][0] == '3')
                 {

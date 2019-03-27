@@ -9,23 +9,22 @@
       "choiceDesc": [
         "I'd better check out the magic store. I may find something useful there"
       ],
-      "next": "MagicStore"
+      "next": "MagicStoreWelcome"
     },
     {
-      "choiceName": "Choice 2",
+      "choiceName": "Forge",
       "choiceDesc": [
-        "This is choice 2 first line",
-        "This is choice 2 second line"
+        "Let's pay the blacksmith a visit. It's never a bad thing to check out gears and equipment."
       ],
-      "next": "Next action"
+      "next": "Forge"
     },
     {
-      "choiceName": "Choice 3",
+      "choiceName": "AdventurerGuild",
       "choiceDesc": [
-        "This is choice 3 first line",
-        "This is choice 3 second line"
+        "Let's see what the adventurer's guild. I may be able to register as an adventurer.",
+        "Otherwise, it's never a bad thing to do a few quests for some pocket change."
       ],
-      "next": "Next action"
+      "next": "AdventurerGuild"
     }
   ]
 }

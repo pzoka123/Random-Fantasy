@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager_2 : MonoBehaviour
 {
-    public static DialogueManager dialogueManager { get; set; }
+    public static DialogueManager_2 dialogueManager_2 { get; set; }
 
     public List<DialoguePart> dialogues = new List<DialoguePart>();
-    //public string[,] dialogues;
+
     int currDialog = 0;
 
     string dialogName;
@@ -27,9 +27,9 @@ public class DialogueManager : MonoBehaviour
 
     void Awake()
     {
-        if (dialogueManager == null)
+        if (dialogueManager_2 == null)
         {
-            dialogueManager = this;
+            dialogueManager_2 = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -137,7 +137,7 @@ public class DialogueManager : MonoBehaviour
         dialogName = dialogues[dialogueIndex].dialogName;
         nameBox.transform.GetChild(0).GetComponent<Text>().text = dialogName;
         
-        string[] lines = dialogues[dialogueIndex].dialogSentences.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
+        string[] lines = dialogues[dialogueIndex].dialogSentences;
         for (int i = 0; i < lines.Length; i++)
         {
             sentences.Enqueue(lines[i]);
