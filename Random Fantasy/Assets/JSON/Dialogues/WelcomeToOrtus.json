@@ -1,0 +1,15 @@
+{
+  "dialogue": [
+    {
+      "name": "",
+      "sentences": [
+        "Welcome to the town of Ortus, the town of beginning.",
+        "You can check out various locations in town.",
+        "Are you a traveling blacksmith? Maybe you would be interested in our Forge.",
+		"How about dropping by the magic store get some magical tomes and potions?",
+		"If you are in the mood for some adventures, you might want to check out our adventurer's guild as well."
+      ]
+    }
+  ],
+  "next": "Ortus"
+}

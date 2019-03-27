@@ -1,0 +1,31 @@
+{
+  "eventName": "Ortus",
+  "eventDesc": [
+    "What are you going to do in the town of Ortus?"
+  ],
+  "choices": [
+    {
+      "choiceName": "MagicStore",
+      "choiceDesc": [
+        "I'd better check out the magic store. I may find something useful there"
+      ],
+      "next": "MagicStore"
+    },
+    {
+      "choiceName": "Choice 2",
+      "choiceDesc": [
+        "This is choice 2 first line",
+        "This is choice 2 second line"
+      ],
+      "next": "Next action"
+    },
+    {
+      "choiceName": "Choice 3",
+      "choiceDesc": [
+        "This is choice 3 first line",
+        "This is choice 3 second line"
+      ],
+      "next": "Next action"
+    }
+  ]
+}

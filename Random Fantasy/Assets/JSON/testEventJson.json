@@ -1,0 +1,33 @@
+{
+  "eventName": "Event",
+  "eventDesc": [
+    "This is event line 1",
+    "This is event line 2"
+  ],
+  "choices": [
+    {
+      "choiceName": "Choice 1",
+      "choiceDesc": [
+        "This is choice 1 first line",
+        "This is choice 1 second line"
+      ],
+      "next": "Next action"
+    },
+    {
+      "choiceName": "Choice 2",
+      "choiceDesc": [
+        "This is choice 2 first line",
+        "This is choice 2 second line"
+      ],
+      "next": "Next action"
+    },
+    {
+      "choiceName": "Choice 3",
+      "choiceDesc": [
+        "This is choice 3 first line",
+        "This is choice 3 second line"
+      ],
+      "next": "Next action"
+    }
+  ]
+}
