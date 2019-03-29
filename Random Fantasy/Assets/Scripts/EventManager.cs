@@ -35,22 +35,11 @@ public class EventManager : MonoBehaviour
 
     public void Display()
     {
-        //eventCard.SetActive(true);
-        //foreach (GameObject card in choiceCards)
-        //{
-        //    card.SetActive(true);
-        //}
         GameObject.FindGameObjectWithTag("EventBoard").GetComponent<Animator>().SetBool("isActive", true);
     }
 
     public void Hide()
     {
-        //eventCard.SetActive(false);
-        //foreach (GameObject card in choiceCards)
-        //{
-        //    card.SetActive(false);
-        //}
-
         eventBoard.GetComponent<Animator>().SetBool("isActive", false);
     }
 

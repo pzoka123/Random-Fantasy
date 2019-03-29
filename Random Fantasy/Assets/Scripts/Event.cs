@@ -6,12 +6,6 @@ public class Event : MonoBehaviour
 {
     GameObject[] choices;
 
-    string eventName;
-    public string EventName { get => eventName; set => eventName = value; }
-
-    string[] sentences;
-    public string[] Sentences { get => sentences; set => sentences = value; }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +17,7 @@ public class Event : MonoBehaviour
         gameObject.GetComponent<Animator>().SetBool("isActive", true);
         EventManager.eventManager.currClicked = gameObject;
         EventManager.eventManager.HideChoice();
-        GameLoop.gameLoop.textFile = Resources.Load("Dialogues/" + DialogueManager.dialogueManager.nextEvent) as TextAsset;
-        //GameLoop.gameLoop.dialogueStart = true;
-        GameLoop.gameLoop.isEvent = false;
-        GameLoop.gameLoop.isDialogue = true;
+        GameLoop.gameLoop.currentAction = GameLoop.Actions.eventAction;
+        GameLoop.gameLoop.nextAction = GameLoop.Actions.eventAction;
     }
 }

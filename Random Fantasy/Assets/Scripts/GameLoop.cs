@@ -3,10 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
+using static JsonCreator;
 
 public class GameLoop : MonoBehaviour
 {
     public IEnumerable gameState;
+
+    public enum Actions
+    {
+        eventAction,
+        dialogue,
+        fight
+    }
+    public Actions currentAction;
+    public Actions nextAction;
+
+    EventData currentEvent;
+    DialogueData currentDialogue;
 
     public TextAsset textFile;
     
@@ -14,6 +28,8 @@ public class GameLoop : MonoBehaviour
     public float darkVal = 0;
 
     public static GameLoop gameLoop { get; set; }
+
+    public string nextFile;
 
     public bool startGame = false;
     public bool eventPhase = false;
@@ -45,16 +61,8 @@ public class GameLoop : MonoBehaviour
 
     void Start()
     {
-        gameState = ActionState();
-        isAction = true;
-        startGame = true;
+        gameState = StandbyState();
         StartCoroutine(RunGameLoop());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public IEnumerator RunGameLoop()
@@ -67,50 +75,59 @@ public class GameLoop : MonoBehaviour
             }
         }
     }
+
+    public IEnumerable StandbyState()
+    {
+        while (true)
+        {
+            if (nextAction == Actions.eventAction)
+            {
+                currentEvent = LoadEvent(nextFile);
+                gameState = EventState();
+                currentAction = Actions.eventAction;
+                break;
+            }
+            else if (nextAction == Actions.dialogue)
+            {
+                currentDialogue = LoadDialogue(nextFile);
+                gameState = DialogueState();
+                currentAction = Actions.dialogue;
+                break;
+            }
+            yield return null;
+        }
+    }
     
     public IEnumerable EventState()
     {
         EventManager.eventManager.Display();
-        while (isEvent)
+        while (true)
         {
+            if (nextAction == Actions.dialogue)
+            {
+                gameState = DialogueState();
+                break;
+            }
             yield return null;
         }
-
-        if (isAction)
-            gameState = ActionState();
-        else if (isDialogue)
-            gameState = DialogueState();
-        //EventManager.eventManager.Hide();
     }
 
     public IEnumerable DialogueState()
     {
-        gameObject.GetComponent<Dialogue>().ReadText(textFile);
-
-        while (isDead)
-        {
-            FadeOut();
-            if (dark.GetComponent<Image>().color.a == 1)
-                isDead = false;
-            yield return null;
-        }
-
         DialogueManager.dialogueManager.Display();
-        while (isDialogue)
+        while (true)
         {
+            if(nextAction == Actions.eventAction)
+            {
+                gameState = EventState();
+                break;
+            }
             yield return null;
         }
 
         DialogueManager.dialogueManager.Hide();
 
-        if (isAction)
-            gameState = ActionState();
-        else if (isEvent)
-            gameState = EventState();
-        else if (isCombat)
-            gameState = CombatState();
-        else if (isEnd)
-            gameState = EndState();
+        gameState = StandbyState();
     }
 
     public IEnumerable ActionState()
@@ -210,5 +227,19 @@ public class GameLoop : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
         FadeIn();
+    }
+
+    DialogueData LoadDialogue(string fileName)
+    {
+        string dialogueJson = File.ReadAllText(Application.dataPath + "/JSON/Dialogues/" + fileName + ".json");
+        DialogueData loadedDialogueData = JsonUtility.FromJson<DialogueData>(dialogueJson);
+        return loadedDialogueData;
+    }
+
+    EventData LoadEvent(string fileName)
+    {
+        string eventJson = File.ReadAllText(Application.dataPath + "/JSON/Events" + fileName + ".json");
+        EventData loadedEventData = JsonUtility.FromJson<EventData>(eventJson);
+        return loadedEventData;
     }
 }

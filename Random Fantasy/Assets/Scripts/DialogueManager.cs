@@ -9,7 +9,6 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager dialogueManager { get; set; }
 
     public List<DialoguePart> dialogues = new List<DialoguePart>();
-    //public string[,] dialogues;
     int currDialog = 0;
 
     string dialogName;
@@ -136,8 +135,8 @@ public class DialogueManager : MonoBehaviour
     {
         dialogName = dialogues[dialogueIndex].dialogName;
         nameBox.transform.GetChild(0).GetComponent<Text>().text = dialogName;
-        
-        string[] lines = dialogues[dialogueIndex].dialogSentences.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
+
+        string[] lines = dialogues[dialogueIndex].dialogSentences;
         for (int i = 0; i < lines.Length; i++)
         {
             sentences.Enqueue(lines[i]);
