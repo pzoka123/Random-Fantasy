@@ -74,12 +74,10 @@ public class DiceBoardManager : MonoBehaviour
         if (rollNum <= 7)
         {
             isHit = "The opponent gets the upper hand and strikes you first.";
-            ActionManager.actionManager.OtherCharacter.GetComponent<Character>().attack = true;
         }
         else
         {
             isHit = "You get to strike first.";
-            ActionManager.actionManager.MainCharacter.GetComponent<Character>().attack = true;
         }
         rollText.GetComponent<Text>().text = rollNum.ToString() + ". " + isHit;
         rollText.SetActive(true);

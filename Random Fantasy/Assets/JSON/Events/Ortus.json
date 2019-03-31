@@ -1,30 +1,27 @@
 {
-  "eventName": "Ortus",
-  "eventDesc": [
-    "What are you going to do in the town of Ortus?"
-  ],
-  "choices": [
-    {
-      "choiceName": "MagicStore",
-      "choiceDesc": [
-        "I'd better check out the magic store. I may find something useful there"
-      ],
-      "next": "MagicStoreWelcome"
-    },
-    {
-      "choiceName": "Forge",
-      "choiceDesc": [
-        "Let's pay the blacksmith a visit. It's never a bad thing to check out gears and equipment."
-      ],
-      "next": "Forge"
-    },
-    {
-      "choiceName": "AdventurerGuild",
-      "choiceDesc": [
-        "Let's see what the adventurer's guild. I may be able to register as an adventurer.",
-        "Otherwise, it's never a bad thing to do a few quests for some pocket change."
-      ],
-      "next": "AdventurerGuild"
-    }
-  ]
+	"eventName": "Ortus",
+	"eventDesc": [
+		"What are you going to do in the town of Ortus?"
+	],
+	"choices": [{
+			"choiceName": "MagicStore",
+			"choiceDesc": [
+				"I'd better check out the magic store. I may find something useful there"
+			],
+			"next": "MagicStoreWelcome"
+		}, {
+			"choiceName": "Forge",
+			"choiceDesc": [
+				"Let's pay the blacksmith a visit. It's never a bad thing to check out gears and equipment."
+			],
+			"next": "Forge"
+		}, {
+			"choiceName": "AdventurerGuild",
+			"choiceDesc": [
+				"Let's see what the adventurer's guild. I may be able to register as an adventurer.",
+				"Otherwise, it's never a bad thing to do a few quests for some pocket change."
+			],
+			"next": "AdventurerGuild"
+		}
+	]
 }

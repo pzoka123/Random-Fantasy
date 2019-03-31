@@ -45,11 +45,12 @@ public class DialogueManager : MonoBehaviour
 
     public void Display()
     {
+        dialogName = null;
         sentences.Clear();
-
+        
         Setup(currDialog);
-
-        if (dialogName == "")
+        
+        if (dialogName == "" || dialogName == null)
             nameBox.SetActive(false);
         else
         {
@@ -77,37 +78,9 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                //GameLoop.gameLoop.dialogueEnd = true;
-                GameLoop.gameLoop.isDialogue = false;
-                if (GameLoop.gameLoop.eventPhase)
-                {
-                    if (EventManager.eventManager.currClicked != null)
-                    {
-                        if (EventManager.eventManager.currClicked.tag == "EventCard")
-                        {
-                            GameLoop.gameLoop.isEvent = true;
-                            EventManager.eventManager.ShowChoice();
-                            EventManager.eventManager.ReturnEvent();
-                        }
-                        else if (EventManager.eventManager.currClicked.tag == "ChoiceCard")
-                        {
-                            GameLoop.gameLoop.isAction = true;
-                            EventManager.eventManager.ReturnChoice();
-                            EventManager.eventManager.Hide();
-                            GameLoop.gameLoop.eventPhase = false;
-                        }
-                    }
-                }
-                else if (combat)
-                {
-                    GameLoop.gameLoop.isCombat = true;
-                    combat = false;
-                }
-                else if (action)
-                {
-                    GameLoop.gameLoop.isAction = true;
-                    action = false;
-                }
+                GameLoop.gameLoop.currentAction = GameLoop.Actions.standby;
+                GameLoop.gameLoop.currentFile = GameLoop.gameLoop.nextFile;
+
                 currDialog = 0;
                 return;
             }
@@ -136,8 +109,8 @@ public class DialogueManager : MonoBehaviour
         dialogName = dialogues[dialogueIndex].dialogName;
         nameBox.transform.GetChild(0).GetComponent<Text>().text = dialogName;
 
-        string[] lines = dialogues[dialogueIndex].dialogSentences;
-        for (int i = 0; i < lines.Length; i++)
+        List<string> lines = dialogues[dialogueIndex].dialogSentences;
+        for (int i = 0; i < lines.Count; i++)
         {
             sentences.Enqueue(lines[i]);
         }

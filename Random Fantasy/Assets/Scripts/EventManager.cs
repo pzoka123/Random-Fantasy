@@ -7,6 +7,9 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager eventManager { get; set; }
 
+    public EventData currentEvent;
+    public List<ChoiceData> currentChoices;
+
     public GameObject currClicked;
 
     GameObject eventBoard;

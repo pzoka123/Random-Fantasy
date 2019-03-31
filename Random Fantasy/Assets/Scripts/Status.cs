@@ -35,11 +35,9 @@ public class Status : MonoBehaviour
         {
             if(envStatus["ShopKeeper"] == 0)
             {
-                ActionManager.actionManager.OtherCharacter.transform.position = new Vector3(13.0f, -0.6f, 94);
             }
             else
             {
-                ActionManager.actionManager.OtherCharacter.transform.position = new Vector3(6.0f, -0.6f, 94);
             }
         }
     }

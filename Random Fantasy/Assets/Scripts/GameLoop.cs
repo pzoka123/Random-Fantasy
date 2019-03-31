@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
-using static JsonCreator;
 
 public class GameLoop : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class GameLoop : MonoBehaviour
 
     public enum Actions
     {
+        standby,
         eventAction,
         dialogue,
         fight
@@ -19,16 +19,15 @@ public class GameLoop : MonoBehaviour
     public Actions currentAction;
     public Actions nextAction;
 
-    EventData currentEvent;
+    JsonCreator.EventData currentEvent;
     DialogueData currentDialogue;
-
-    public TextAsset textFile;
     
     public GameObject dark;
     public float darkVal = 0;
 
     public static GameLoop gameLoop { get; set; }
 
+    public string currentFile;
     public string nextFile;
 
     public bool startGame = false;
@@ -62,6 +61,8 @@ public class GameLoop : MonoBehaviour
     void Start()
     {
         gameState = StandbyState();
+        currentFile = "WelcomeToOrtus";
+        nextAction = Actions.dialogue;
         StartCoroutine(RunGameLoop());
     }
 
@@ -82,14 +83,14 @@ public class GameLoop : MonoBehaviour
         {
             if (nextAction == Actions.eventAction)
             {
-                currentEvent = LoadEvent(nextFile);
+                LoadEvent(currentFile);
                 gameState = EventState();
                 currentAction = Actions.eventAction;
                 break;
             }
             else if (nextAction == Actions.dialogue)
             {
-                currentDialogue = LoadDialogue(nextFile);
+                LoadDialogue(currentFile);
                 gameState = DialogueState();
                 currentAction = Actions.dialogue;
                 break;
@@ -100,6 +101,7 @@ public class GameLoop : MonoBehaviour
     
     public IEnumerable EventState()
     {
+        DialogueManager.dialogueManager.Display();
         EventManager.eventManager.Display();
         while (true)
         {
@@ -117,90 +119,22 @@ public class GameLoop : MonoBehaviour
         DialogueManager.dialogueManager.Display();
         while (true)
         {
-            if(nextAction == Actions.eventAction)
+            if (currentAction != Actions.dialogue)
             {
-                gameState = EventState();
+                gameState = StandbyState();
                 break;
             }
             yield return null;
         }
 
         DialogueManager.dialogueManager.Hide();
-
-        gameState = StandbyState();
-    }
-
-    public IEnumerable ActionState()
-    {
-        if (startGame)
-        {
-            textFile = Resources.Load("Starts/TownStart") as TextAsset;
-            startGame = false;
-        }
-        else
-        {
-            textFile = Resources.Load("Actions/" + DialogueManager.dialogueManager.nextAction) as TextAsset;
-        }
-        ActionManager.actionManager.ReadText(textFile);
-
-        while (isAction)
-        {
-            ActionManager.actionManager.Move();
-            yield return null;
-        }
-
-        while (endScene)
-        {
-            FadeOut();
-            if (dark.GetComponent<Image>().color.a == 1)
-            {
-                endScene = false;
-                LoadScene(nextScene);
-            }
-            yield return null;
-        }
-
-        if (isDialogue)
-            gameState = DialogueState();
-        else if (isEvent)
-            gameState = EventState();
-        else if (isCombat)
-            gameState = CombatState();
-        else
-        {
-            isAction = true;
-            yield return null;
-        }
     }
 
     public IEnumerable CombatState()
     {
         DiceBoardManager.diceBoardManager.Setup();
         DiceBoardManager.diceBoardManager.Display();
-        while (isCombat)
-        {
-            ActionManager.actionManager.AttackMain();
-            ActionManager.actionManager.AttackOther();
-            ActionManager.actionManager.Die();
-            ActionManager.actionManager.NextDialogue();
-            yield return null;
-        }
-
-        if (ActionManager.actionManager.OtherCharacter.GetComponent<Character>().isDead)
-        {
-            textFile = Resources.Load("Dialogues/" + victoryText) as TextAsset;
-        }
-        else
-        {
-            textFile = Resources.Load("Dialogues/" + defeatText) as TextAsset;
-        }
-
-        if (isAction)
-            gameState = ActionState();
-        else if (isDialogue)
-            gameState = DialogueState();
-
-        DiceBoardManager.diceBoardManager.Hide();
+        yield return null;
     }
 
     public IEnumerable EndState()
@@ -229,17 +163,60 @@ public class GameLoop : MonoBehaviour
         FadeIn();
     }
 
-    DialogueData LoadDialogue(string fileName)
+    void LoadDialogue(string fileName)
     {
+        DialogueManager.dialogueManager.dialogues.Clear();
         string dialogueJson = File.ReadAllText(Application.dataPath + "/JSON/Dialogues/" + fileName + ".json");
         DialogueData loadedDialogueData = JsonUtility.FromJson<DialogueData>(dialogueJson);
-        return loadedDialogueData;
+
+        List<DialoguePart> dialoguesTemp = new List<DialoguePart>();
+        for (int i = 0; i < loadedDialogueData.dialogue.Count; i++)
+        {
+            DialoguePart tempPart = new DialoguePart
+            {
+                dialogName = loadedDialogueData.dialogue[i].dialogueName,
+                dialogSentences = loadedDialogueData.dialogue[i].sentences
+            };
+            dialoguesTemp.Add(tempPart);
+        }
+        DialogueManager.dialogueManager.dialogues = dialoguesTemp;
+        nextFile = loadedDialogueData.next;
+        if (loadedDialogueData.nextAction == "event")
+        {
+            nextAction = Actions.eventAction;
+        }
     }
 
-    EventData LoadEvent(string fileName)
+    void LoadEvent(string fileName)
     {
-        string eventJson = File.ReadAllText(Application.dataPath + "/JSON/Events" + fileName + ".json");
+        string eventJson = File.ReadAllText(Application.dataPath + "/JSON/Events/" + fileName + ".json");
         EventData loadedEventData = JsonUtility.FromJson<EventData>(eventJson);
-        return loadedEventData;
+
+        EventData eventTemp = new EventData
+        {
+            eventName = loadedEventData.eventName,
+            eventDesc = loadedEventData.eventDesc,
+        };
+        EventManager.eventManager.currentEvent = eventTemp;
+
+        DialoguePart tempPart = new DialoguePart
+        {
+            dialogName = null,
+            dialogSentences = eventTemp.eventDesc
+        };
+        DialogueManager.dialogueManager.dialogues.Add(tempPart);
+
+        List<ChoiceData> choicesTemp = new List<ChoiceData>();
+        for (int i = 0; i < loadedEventData.choices.Count; i++)
+        {
+            ChoiceData choiceTemp = new ChoiceData
+            {
+                choiceName = loadedEventData.choices[i].choiceName,
+                choiceDesc = loadedEventData.choices[i].choiceDesc,
+                next = loadedEventData.choices[i].next
+            };
+            choicesTemp.Add(choiceTemp);
+        }
+        EventManager.eventManager.currentChoices = choicesTemp;
     }
 }

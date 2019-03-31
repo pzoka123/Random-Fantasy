@@ -3,20 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public static class JsonCreator
+public static class JsonCreator //: MonoBehaviour
 {
+    static void Start()
+    {
+        //Write DialogueData
+        //DialogueData dialogueData = new DialogueData();
+        //string json = JsonUtility.ToJson(dialogueData);
+        //File.WriteAllText(Application.dataPath + "/JSON/testDialogue.json", json);
 
-    // Start is called before the first frame update
-    //static void Start()
-    //{
-    //    //Test reading Event Json
-    //    string eventJson = File.ReadAllText(Application.dataPath + "/JSON/testEventJson.json");
-    //    EventData loadedEventData = JsonUtility.FromJson<EventData>(eventJson);
-    //
-    //    //Test reading Dialogue Json
-    //    string dialogueJson = File.ReadAllText(Application.dataPath + "/JSON/testDialogueJson.json");
-    //    DialogueData loadedDialogueData = JsonUtility.FromJson<DialogueData>(dialogueJson);
-    //}
+        //Write Dialogue
+        //Dialogue dialogue = new Dialogue();
+        //string json = JsonUtility.ToJson(dialogue);
+        //File.WriteAllText(Application.dataPath + "/JSON/testDialogue.json", json);
+
+        ////Test reading Event Json
+        //string eventJson = File.ReadAllText(Application.dataPath + "/JSON/testEventJson.json");
+        //EventData loadedEventData = JsonUtility.FromJson<EventData>(eventJson);
+
+        ////Test reading Dialogue Json
+        //string dialogueJson = File.ReadAllText(Application.dataPath + "/JSON/testDialogueJson.json");
+        //DialogueData loadedDialogueData = JsonUtility.FromJson<DialogueData>(dialogueJson);
+    }
 
     public class EventData
     {
@@ -68,6 +76,7 @@ public static class JsonCreator
         }
     }
 
+    [System.Serializable]
     public class ChoiceData
     {
         public string choiceName;
@@ -77,19 +86,20 @@ public static class JsonCreator
         public ChoiceData()
         {
             choiceName = "Choice";
-            next = "Next action";
             choiceDesc = new string[]
             {
                 "This is the first line",
                 "This is the second line"
             };
+            next = "Next action";
         }
     }
 
     public class DialogueData
     {
-        public IList<Dialogue> dialogue;
+        public List<Dialogue> dialogue;
         public string next;
+        public string nextAction;
 
         public DialogueData()
         {
@@ -98,7 +108,7 @@ public static class JsonCreator
                 new Dialogue
                 {
                     name = "Player",
-                    sentences = new string[]
+                    sentences = new List<string>
                     {
                         "Player sentence 1",
                         "Player sentence 2",
@@ -108,7 +118,7 @@ public static class JsonCreator
                 new Dialogue
                 {
                     name = "Other Char",
-                    sentences = new string[]
+                    sentences = new List<string>
                     {
                         "Other sentence 1",
                         "Other sentence 2",
@@ -118,7 +128,7 @@ public static class JsonCreator
                 new Dialogue
                 {
                     name = "Player",
-                    sentences = new string[]
+                    sentences = new List<string>
                     {
                         "Player sentence 4",
                         "Player sentence 5",
@@ -127,7 +137,7 @@ public static class JsonCreator
                 new Dialogue
                 {
                     name = "Other Char",
-                    sentences = new string[]
+                    sentences = new List<string>
                     {
                         "Other sentence 4",
                         "Other sentence 5",
@@ -137,25 +147,27 @@ public static class JsonCreator
                 new Dialogue
                 {
                     name = "Player",
-                    sentences = new string[]
+                    sentences = new List<string>
                     {
                         "Player sentence 7"
                     }
                 }
             };
             next = "Next action";
+            nextAction = "dialogue";
         }
     }
 
+    [System.Serializable]
     public class Dialogue
     {
         public string name;
-        public string[] sentences;
+        public List<string> sentences;
 
         public Dialogue()
         {
             name = "Char Name";
-            sentences = new string[]
+            sentences = new List<string>
             {
                 "This is the first sentence",
                 "This is the second sentence",

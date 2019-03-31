@@ -5,5 +5,5 @@ using UnityEngine;
 public class DialoguePart
 {
     public string dialogName;
-    public string[] dialogSentences;
+    public List<string> dialogSentences;
 }

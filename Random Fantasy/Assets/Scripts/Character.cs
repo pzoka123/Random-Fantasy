@@ -102,13 +102,10 @@ public class Character : MonoBehaviour
     {
         if (gameObject.tag == "Player" && anim.GetBool("attack"))
         {
-            ActionManager.actionManager.OtherCharacter.GetComponent<Character>().die = true;
         }
         else
         {
-            ActionManager.actionManager.MainCharacter.GetComponent<Character>().die = true;
         }
         anim.SetBool("attack", false);
-        ActionManager.actionManager.nextDialogue = true;
     }
 }
