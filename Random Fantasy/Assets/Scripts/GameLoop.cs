@@ -18,6 +18,7 @@ public class GameLoop : MonoBehaviour
     }
     public Actions currentAction;
     public Actions nextAction;
+    public bool eventDescDialogue;
 
     JsonCreator.EventData currentEvent;
     DialogueData currentDialogue;
@@ -101,7 +102,14 @@ public class GameLoop : MonoBehaviour
     
     public IEnumerable EventState()
     {
+        eventDescDialogue = true;
         DialogueManager.dialogueManager.Display();
+        while (eventDescDialogue)
+        {
+            yield return null;
+        }
+        DialogueManager.dialogueManager.Hide();
+
         EventManager.eventManager.Display();
         while (true)
         {
@@ -189,6 +197,7 @@ public class GameLoop : MonoBehaviour
 
     void LoadEvent(string fileName)
     {
+        DialogueManager.dialogueManager.dialogues.Clear();
         string eventJson = File.ReadAllText(Application.dataPath + "/JSON/Events/" + fileName + ".json");
         EventData loadedEventData = JsonUtility.FromJson<EventData>(eventJson);
 

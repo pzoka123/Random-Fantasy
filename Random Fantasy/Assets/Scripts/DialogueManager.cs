@@ -78,8 +78,15 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                GameLoop.gameLoop.currentAction = GameLoop.Actions.standby;
-                GameLoop.gameLoop.currentFile = GameLoop.gameLoop.nextFile;
+                if (GameLoop.gameLoop.currentAction == GameLoop.Actions.eventAction)
+                {
+                    GameLoop.gameLoop.eventDescDialogue = false;
+                }
+                else
+                {
+                    GameLoop.gameLoop.currentAction = GameLoop.Actions.standby;
+                    GameLoop.gameLoop.currentFile = GameLoop.gameLoop.nextFile;
+                }
 
                 currDialog = 0;
                 return;
