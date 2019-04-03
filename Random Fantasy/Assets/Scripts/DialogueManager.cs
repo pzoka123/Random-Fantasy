@@ -78,6 +78,17 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
+                if (EventManager.eventManager.clicked == "event")
+                {
+                    EventManager.eventManager.eventCard.GetComponent<Animator>().SetBool("isActive", false);
+                    EventManager.eventManager.ShowChoice();
+                }
+                else if (EventManager.eventManager.clicked == "choice")
+                {
+                    EventManager.eventManager.currClicked.GetComponent<Animator>().SetBool("isActive", false);
+                    EventManager.eventManager.ReturnChoice();
+                }
+
                 if (GameLoop.gameLoop.currentAction == GameLoop.Actions.eventAction)
                 {
                     GameLoop.gameLoop.eventDescDialogue = false;
@@ -87,6 +98,7 @@ public class DialogueManager : MonoBehaviour
                     GameLoop.gameLoop.currentAction = GameLoop.Actions.standby;
                     GameLoop.gameLoop.currentFile = GameLoop.gameLoop.nextFile;
                 }
+                Hide();
 
                 currDialog = 0;
                 return;

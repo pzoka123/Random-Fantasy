@@ -9,12 +9,12 @@ public class EventManager : MonoBehaviour
 
     public EventData currentEvent;
     public List<ChoiceData> currentChoices;
-
+    public string clicked;
     public GameObject currClicked;
 
-    GameObject eventBoard;
-    GameObject eventCard;
-    GameObject[] choiceCards;
+    public GameObject eventBoard;
+    public GameObject eventCard;
+    public GameObject[] choiceCards;
 
     void Awake()
     {
@@ -62,7 +62,6 @@ public class EventManager : MonoBehaviour
 
     public void ShowChoice()
     {
-        choiceCards = GameObject.FindGameObjectsWithTag("ChoiceCard");
         foreach (GameObject card in choiceCards)
         {
             card.GetComponent<Image>().enabled = true;
@@ -78,16 +77,15 @@ public class EventManager : MonoBehaviour
         currClicked.GetComponent<Button>().enabled = false;
         currClicked.GetComponentInChildren<Text>().enabled = false;
 
-        Destroy(eventCard);
-        foreach (GameObject card in choiceCards)
-        {
-            Destroy(card);
-        }
+        //Destroy(eventCard);
+        //foreach (GameObject card in choiceCards)
+        //{
+        //    Destroy(card);
+        //}
     }
 
     public void HideChoice()
     {
-        choiceCards = GameObject.FindGameObjectsWithTag("ChoiceCard");
         foreach (GameObject card in choiceCards)
         {
             if (card != currClicked)
@@ -95,6 +93,50 @@ public class EventManager : MonoBehaviour
                 card.GetComponent<Image>().enabled = false;
                 card.GetComponent<Button>().enabled = false;
                 card.GetComponentInChildren<Text>().enabled = false;
+            }
+        }
+    }
+
+    public void DisplayEvent()
+    {
+        eventCard.GetComponent<Animator>().SetBool("isActive", true);
+        HideChoice();
+        GameLoop.gameLoop.cardDisplay = true;
+        clicked = "event";
+
+        //Set up dialogue
+        DialogueManager.dialogueManager.dialogues.Clear();
+        DialoguePart tempPart = new DialoguePart
+        {
+            dialogName = null,
+            dialogSentences = currentEvent.eventDesc
+        };
+        DialogueManager.dialogueManager.dialogues.Add(tempPart);
+    }
+
+    public void DisplayChoice(GameObject choice)
+    {
+        currClicked = choice;
+        choice.GetComponent<Animator>().SetBool("isActive", true);
+        HideEvent();
+        HideChoice();
+        GameLoop.gameLoop.cardDisplay = true;
+        clicked = "choice";
+
+        //Set up dialogue
+        DialogueManager.dialogueManager.dialogues.Clear();
+        for (int i = 0; i < currentChoices.Count; i++)
+        {
+            if (choice.GetComponentInChildren<Text>().text == currentChoices[i].choiceName)
+            {
+                DialoguePart tempPart = new DialoguePart
+                {
+                    dialogName = "Player",
+                    dialogSentences = currentChoices[i].choiceDesc
+                };
+                DialogueManager.dialogueManager.dialogues.Add(tempPart);
+                //GameLoop.gameLoop.nextFile = currentChoices[i].next;
+                break;
             }
         }
     }

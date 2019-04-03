@@ -19,8 +19,9 @@ public class GameLoop : MonoBehaviour
     public Actions currentAction;
     public Actions nextAction;
     public bool eventDescDialogue;
+    public bool cardDisplay;
 
-    JsonCreator.EventData currentEvent;
+    EventData currentEvent;
     DialogueData currentDialogue;
     
     public GameObject dark;
@@ -113,6 +114,12 @@ public class GameLoop : MonoBehaviour
         EventManager.eventManager.Display();
         while (true)
         {
+            if (cardDisplay)
+            {
+                DialogueManager.dialogueManager.Display();
+                cardDisplay = false;
+            }
+
             if (nextAction == Actions.dialogue)
             {
                 gameState = DialogueState();
@@ -135,7 +142,7 @@ public class GameLoop : MonoBehaviour
             yield return null;
         }
 
-        DialogueManager.dialogueManager.Hide();
+        //DialogueManager.dialogueManager.Hide();
     }
 
     public IEnumerable CombatState()
@@ -207,6 +214,7 @@ public class GameLoop : MonoBehaviour
             eventDesc = loadedEventData.eventDesc,
         };
         EventManager.eventManager.currentEvent = eventTemp;
+        EventManager.eventManager.eventCard.GetComponentInChildren<Text>().text = eventTemp.eventName;
 
         DialoguePart tempPart = new DialoguePart
         {
@@ -227,5 +235,9 @@ public class GameLoop : MonoBehaviour
             choicesTemp.Add(choiceTemp);
         }
         EventManager.eventManager.currentChoices = choicesTemp;
+        for (int i = 0; i < EventManager.eventManager.choiceCards.Length; i++)
+        {
+            EventManager.eventManager.choiceCards[i].GetComponentInChildren<Text>().text = choicesTemp[i].choiceName;
+        }
     }
 }

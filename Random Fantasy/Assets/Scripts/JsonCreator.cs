@@ -26,7 +26,7 @@ public static class JsonCreator //: MonoBehaviour
         //DialogueData loadedDialogueData = JsonUtility.FromJson<DialogueData>(dialogueJson);
     }
 
-    public class EventData
+    class EventData
     {
         public string eventName;
         public string[] eventDesc;
@@ -77,7 +77,7 @@ public static class JsonCreator //: MonoBehaviour
     }
 
     [System.Serializable]
-    public class ChoiceData
+    class ChoiceData
     {
         public string choiceName;
         public string[] choiceDesc;
@@ -95,7 +95,7 @@ public static class JsonCreator //: MonoBehaviour
         }
     }
 
-    public class DialogueData
+    class DialogueData
     {
         public List<Dialogue> dialogue;
         public string next;
@@ -159,7 +159,7 @@ public static class JsonCreator //: MonoBehaviour
     }
 
     [System.Serializable]
-    public class Dialogue
+    class Dialogue
     {
         public string name;
         public List<string> sentences;

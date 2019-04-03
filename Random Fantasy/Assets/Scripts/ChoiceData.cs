@@ -6,6 +6,6 @@ using UnityEngine;
 public class ChoiceData
 {
     public string choiceName;
-    public string[] choiceDesc;
+    public List<string> choiceDesc;
     public string next;
 }
