@@ -8,4 +8,5 @@ public class DialogueData
     public List<Dialogue> dialogue;
     public string next;
     public string nextAction;
+    public string scene;
 }

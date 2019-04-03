@@ -9,5 +9,7 @@
       ]
     }
   ],
-  "next": "MagicStore"
+  "next": "MagicStore",
+  "nextAction": "event",
+  "scene": "MagicStore"
 }

@@ -8,4 +8,5 @@ public class ChoiceData
     public string choiceName;
     public List<string> choiceDesc;
     public string next;
+    public string scene;
 }

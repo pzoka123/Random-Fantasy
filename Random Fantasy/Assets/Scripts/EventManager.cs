@@ -38,7 +38,9 @@ public class EventManager : MonoBehaviour
 
     public void Display()
     {
-        GameObject.FindGameObjectWithTag("EventBoard").GetComponent<Animator>().SetBool("isActive", true);
+        eventBoard.GetComponent<Animator>().SetBool("isActive", true);
+        ShowEvent();
+        ShowChoice();
     }
 
     public void Hide()
@@ -46,15 +48,21 @@ public class EventManager : MonoBehaviour
         eventBoard.GetComponent<Animator>().SetBool("isActive", false);
     }
 
+    public void ShowEvent()
+    {
+        eventCard.GetComponent<Image>().enabled = true;
+        eventCard.GetComponent<Button>().enabled = true;
+        eventCard.GetComponentInChildren<Text>().enabled = true;
+        eventCard.transform.GetChild(0).GetComponent<Image>().enabled = true;
+    }
+
     public void ReturnEvent()
     {
-        eventCard = GameObject.FindGameObjectWithTag("EventCard");
         eventCard.GetComponent<Animator>().SetBool("isActive", false);
     }
 
     public void HideEvent()
     {
-        eventCard = GameObject.FindGameObjectWithTag("EventCard");
         eventCard.GetComponent<Image>().enabled = false;
         eventCard.transform.GetChild(0).GetComponent<Image>().enabled = false;
         eventCard.GetComponentInChildren<Text>().enabled = false;
@@ -76,12 +84,6 @@ public class EventManager : MonoBehaviour
         currClicked.GetComponent<Image>().enabled = false;
         currClicked.GetComponent<Button>().enabled = false;
         currClicked.GetComponentInChildren<Text>().enabled = false;
-
-        //Destroy(eventCard);
-        //foreach (GameObject card in choiceCards)
-        //{
-        //    Destroy(card);
-        //}
     }
 
     public void HideChoice()
@@ -135,7 +137,8 @@ public class EventManager : MonoBehaviour
                     dialogSentences = currentChoices[i].choiceDesc
                 };
                 DialogueManager.dialogueManager.dialogues.Add(tempPart);
-                //GameLoop.gameLoop.nextFile = currentChoices[i].next;
+                GameLoop.gameLoop.nextFile = currentChoices[i].next;
+                GameLoop.gameLoop.nextScene = currentChoices[i].scene;
                 break;
             }
         }

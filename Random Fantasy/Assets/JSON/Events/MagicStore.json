@@ -1,0 +1,30 @@
+{
+	"eventName": "MagicStore",
+	"eventDesc": [
+		"What are you going to do in the Magic Store?"
+	],
+	"choices": [{
+			"choiceName": "Purchase Tome",
+			"choiceDesc": [
+				"I will purchase a tome of knowledge, thank you very much."
+			],
+			"next": "NextAction",
+			"scene": "MagicStore"
+		}, {
+			"choiceName": "Purchase Potion",
+			"choiceDesc": [
+				"I'd like the best strength potion in your store."
+			],
+			"next": "NextAction",
+			"scene": "MagicStore"
+		}, {
+			"choiceName": "Train Alchemy",
+			"choiceDesc": [
+				"I'd like to learn more about magic and alchemy.",
+				"Please teach me everything."
+			],
+			"next": "NextAction",
+			"scene": "MagicStore"
+		}
+	]
+}

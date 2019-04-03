@@ -18,6 +18,7 @@ TagManager:
   - EventBoard
   - Positions
   - OtherChar
+  - Scene
   layers:
   - Default
   - TransparentFX

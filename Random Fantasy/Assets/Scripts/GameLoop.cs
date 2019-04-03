@@ -25,18 +25,21 @@ public class GameLoop : MonoBehaviour
     DialogueData currentDialogue;
     
     public GameObject dark;
-    public float darkVal = 0;
+    public bool transition = false;
 
     public static GameLoop gameLoop { get; set; }
 
     public string currentFile;
     public string nextFile;
+    public string currentScene;
+    public string nextScene;
+
+    GameObject[] scenes;
 
     public bool startGame = false;
     public bool eventPhase = false;
     public bool isDead = false;
     public bool endScene = false;
-    public string nextScene;
 
     public bool isEvent = false;
     public bool isDialogue = false;
@@ -64,6 +67,15 @@ public class GameLoop : MonoBehaviour
     {
         gameState = StandbyState();
         currentFile = "WelcomeToOrtus";
+        currentScene = "Ortus";
+        scenes = GameObject.FindGameObjectsWithTag("Scene");
+        foreach (GameObject scene in scenes)
+        {
+            if (scene.name != currentScene)
+            {
+                scene.SetActive(false);
+            }
+        }
         nextAction = Actions.dialogue;
         StartCoroutine(RunGameLoop());
     }
@@ -81,6 +93,42 @@ public class GameLoop : MonoBehaviour
 
     public IEnumerable StandbyState()
     {
+        if (transition)
+        {
+            FadeOut();
+            while (dark.GetComponent<Image>().color.a != 1)
+            {
+                yield return null;
+            }
+            transition = false;
+        }
+        
+        while (true)
+        {
+            if (dark.GetComponent<Image>().color.a == 1 && !transition)
+            {
+                currentScene = nextScene;
+                foreach (GameObject scene in scenes)
+                {
+                    if (scene.name != currentScene)
+                    {
+                        scene.SetActive(false);
+                    }
+                    else
+                    {
+                        scene.SetActive(true);
+                    }
+                }
+                FadeIn();
+            }
+            while (dark.GetComponent<Image>().color.a != 0)
+            {
+                yield return null;
+            }
+            break;
+        }
+        
+
         while (true)
         {
             if (nextAction == Actions.eventAction)
@@ -103,6 +151,7 @@ public class GameLoop : MonoBehaviour
     
     public IEnumerable EventState()
     {
+        EventManager.eventManager.currClicked = null;
         eventDescDialogue = true;
         DialogueManager.dialogueManager.Display();
         while (eventDescDialogue)
@@ -120,9 +169,14 @@ public class GameLoop : MonoBehaviour
                 cardDisplay = false;
             }
 
-            if (nextAction == Actions.dialogue)
+            if (currentAction == Actions.dialogue)
             {
                 gameState = DialogueState();
+                break;
+            }
+            else if (currentAction == Actions.standby)
+            {
+                gameState = StandbyState();
                 break;
             }
             yield return null;
@@ -200,6 +254,7 @@ public class GameLoop : MonoBehaviour
         {
             nextAction = Actions.eventAction;
         }
+        nextScene = loadedDialogueData.scene;
     }
 
     void LoadEvent(string fileName)
@@ -230,7 +285,8 @@ public class GameLoop : MonoBehaviour
             {
                 choiceName = loadedEventData.choices[i].choiceName,
                 choiceDesc = loadedEventData.choices[i].choiceDesc,
-                next = loadedEventData.choices[i].next
+                next = loadedEventData.choices[i].next,
+                scene = loadedEventData.choices[i].scene
             };
             choicesTemp.Add(choiceTemp);
         }

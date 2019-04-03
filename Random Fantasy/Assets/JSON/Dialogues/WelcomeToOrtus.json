@@ -11,5 +11,6 @@
 		}
 	],
 	"next": "Ortus",
-	"nextAction": "event"
+	"nextAction": "event",
+	"scene": "Ortus"
 }

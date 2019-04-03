@@ -13,9 +13,11 @@ public class DialogueManager : MonoBehaviour
 
     string dialogName;
     Queue<string> sentences = new Queue<string>();
+    string currentSentence;
 
     GameObject nameBox;
     GameObject dialogBox;
+    bool runningText = false;
 
     public string nextAction;
     public string nextEvent;
@@ -45,6 +47,9 @@ public class DialogueManager : MonoBehaviour
 
     public void Display()
     {
+        EventManager.eventManager.eventCard.GetComponent<Button>().enabled = false;
+        if (EventManager.eventManager.currClicked != null)
+            EventManager.eventManager.currClicked.GetComponent<Button>().enabled = false;
         dialogName = null;
         sentences.Clear();
         
@@ -69,7 +74,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
+        if (sentences.Count == 0 && !runningText)
         {
             currDialog++;
             if (currDialog != dialogues.Count)
@@ -82,11 +87,16 @@ public class DialogueManager : MonoBehaviour
                 {
                     EventManager.eventManager.eventCard.GetComponent<Animator>().SetBool("isActive", false);
                     EventManager.eventManager.ShowChoice();
+                    EventManager.eventManager.eventCard.GetComponent<Button>().enabled = true;
                 }
                 else if (EventManager.eventManager.clicked == "choice")
                 {
                     EventManager.eventManager.currClicked.GetComponent<Animator>().SetBool("isActive", false);
                     EventManager.eventManager.ReturnChoice();
+                    GameLoop.gameLoop.currentAction = GameLoop.Actions.standby;
+                    GameLoop.gameLoop.nextAction = GameLoop.Actions.dialogue;
+                    EventManager.eventManager.clicked = null;
+                    EventManager.eventManager.Hide();
                 }
 
                 if (GameLoop.gameLoop.currentAction == GameLoop.Actions.eventAction)
@@ -97,6 +107,10 @@ public class DialogueManager : MonoBehaviour
                 {
                     GameLoop.gameLoop.currentAction = GameLoop.Actions.standby;
                     GameLoop.gameLoop.currentFile = GameLoop.gameLoop.nextFile;
+                    if (GameLoop.gameLoop.nextScene != GameLoop.gameLoop.currentScene)
+                    {
+                        GameLoop.gameLoop.transition = true;
+                    }
                 }
                 Hide();
 
@@ -106,21 +120,31 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            string sentence = sentences.Dequeue();
-            dialogBox.transform.GetChild(0).GetComponent<Text>().text = sentence;
-            StopAllCoroutines();
-            StartCoroutine(TypeSentence(sentence));
+            if (runningText)
+            {
+                StopAllCoroutines();
+                dialogBox.transform.GetChild(0).GetComponent<Text>().text = currentSentence;
+                runningText = false;
+            }
+            else
+            {
+                currentSentence = sentences.Dequeue();
+                StopAllCoroutines();
+                StartCoroutine(TypeSentence(currentSentence));
+            }
         }
     }
 
     IEnumerator TypeSentence(string sentence)
     {
+        runningText = true;
         dialogBox.transform.GetChild(0).GetComponent<Text>().text = "";
         foreach (char letter in sentence.ToCharArray())
         {
             dialogBox.transform.GetChild(0).GetComponent<Text>().text += letter;
             yield return null;
         }
+        runningText = false;
     }
 
     void Setup(int dialogueIndex)
