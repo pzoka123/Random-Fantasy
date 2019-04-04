@@ -19,6 +19,7 @@ TagManager:
   - Positions
   - OtherChar
   - Scene
+  - NextArrow
   layers:
   - Default
   - TransparentFX
