@@ -10,9 +10,6 @@ public class Status : MonoBehaviour
     Dictionary<string, int> envStatus = new Dictionary<string, int>();
     public Dictionary<string, int> EnvStatus { get => envStatus; set => envStatus = value; }
 
-    Dictionary<string, int> playerStatus = new Dictionary<string, int>();
-    public Dictionary<string, int> PlayerStatus { get => playerStatus; set => playerStatus = value; }
-
     void Awake()
     {
         if (status == null)
@@ -31,14 +28,6 @@ public class Status : MonoBehaviour
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "PotionStore")
-        {
-            if(envStatus["ShopKeeper"] == 0)
-            {
-            }
-            else
-            {
-            }
-        }
+
     }
 }

@@ -2719,7 +2719,6 @@ GameObject:
   - component: {fileID: 2110698218}
   - component: {fileID: 2110698222}
   - component: {fileID: 2110698219}
-  - component: {fileID: 2110698220}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2769,18 +2768,6 @@ MonoBehaviour:
   canDie2: 0
   endFight: 0
   dice: 2
---- !u!114 &2110698220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110698217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2509df31d46293a40a352dd62ad4c115, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2110698222
 MonoBehaviour:
   m_ObjectHideFlags: 0

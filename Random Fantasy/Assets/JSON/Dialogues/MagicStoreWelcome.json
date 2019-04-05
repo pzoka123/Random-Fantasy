@@ -1,15 +1,15 @@
 {
-  "dialogue": [
-    {
-      "name": "Store Keeper",
-      "sentences": [
-        "Welcome, welcome. What can I get for you today?",
-        "Are you looking for a spell book? We have plenty on our shelves.",
-        "Or perhaps you want to check out the magic potions. I have many, whether it is healing or enchanting."
-      ]
-    }
-  ],
-  "next": "MagicStore",
-  "nextAction": "event",
-  "scene": "MagicStore"
+	"dialogue": [{
+		"name": "Store Keeper",
+		"sentences": [
+			"Welcome, welcome. What can I get for you today?",
+			"Are you looking for a spell book? We have plenty on our shelves.",
+			"Or perhaps you want to check out the magic potions. I have many, whether it is healing or enchanting."
+		]
+	}],
+	"next": "MagicStore",
+	"nextAction": "event",
+	"scene": "MagicStore",
+	"items": [	],
+	"stats": [	]
 }

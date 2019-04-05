@@ -8,7 +8,7 @@
 			"choiceDesc": [
 				"I will purchase a tome of knowledge, thank you very much."
 			],
-			"next": "NextAction",
+			"next": "PurchaseTome",
 			"scene": "MagicStore"
 		}, {
 			"choiceName": "Purchase Potion",
