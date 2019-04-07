@@ -1,0 +1,24 @@
+{
+	"dialogue": [{
+			"name": "Store Keeper",
+			"sentences": [
+				"Very well. I shall teach you about alchemy.",
+				"It is an arduous process, so don't expect to master it anytime soon."
+			]
+		}, {
+			"name": "",
+			"sentences": [
+				"You spend your time to learn from the potion storekeeper. You slowly got better at alchemy."
+			]
+		}
+	],
+	"next": "MagicStoreWelcome",
+	"nextAction": "dialogue",
+	"scene": "MagicStore",
+	"items": [],
+	"stats": [{
+			"statsName": "Alchemy",
+			"value": "5"
+		}
+	]
+}

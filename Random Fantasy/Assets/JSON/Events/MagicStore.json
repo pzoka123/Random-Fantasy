@@ -6,24 +6,24 @@
 	"choices": [{
 			"choiceName": "Purchase Tome",
 			"choiceDesc": [
-				"I will purchase a tome of knowledge, thank you very much."
+				"I will purchase a tome that will increase my magic ability. Do you have any in store?"
 			],
 			"next": "PurchaseTome",
 			"scene": "MagicStore"
 		}, {
 			"choiceName": "Purchase Potion",
 			"choiceDesc": [
-				"I'd like the best strength potion in your store."
+				"I'd like a strength potion that can increase my physical power."
 			],
-			"next": "NextAction",
+			"next": "PurchasePotion",
 			"scene": "MagicStore"
 		}, {
 			"choiceName": "Train Alchemy",
 			"choiceDesc": [
 				"I'd like to learn more about magic and alchemy.",
-				"Please teach me everything."
+				"Please teach me."
 			],
-			"next": "NextAction",
+			"next": "TrainAlchemy",
 			"scene": "MagicStore"
 		}
 	]
