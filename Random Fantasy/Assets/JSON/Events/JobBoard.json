@@ -1,0 +1,30 @@
+{
+	"eventName": "Job Board",
+	"eventDesc": [
+		"What quest are you going to choose?"
+	],
+	"choices": [{
+			"choiceName": "Golem Slaying",
+			"choiceDesc": [
+				"I'll go kill some golems in the stone ruins. They sometimes drop rare materials."
+			],
+			"next": "GolemSlaying",
+			"scene": "StoneRuins"
+		}, {
+			"choiceName": "Bandit Hunting",
+			"choiceDesc": [
+				"It says here that there is a group of vicious bandits in the nearby forrest that needs to be cleared.",
+				"I'd better go check it out."
+			],
+			"next": "BanditHunting",
+			"scene": "Forrest"
+		}, {
+			"choiceName": "Dungeon Discovery",
+			"choiceDesc": [
+				"<This is currently unavailable>"
+			],
+			"next": "JobBoardWelcome",
+			"scene": "JobBoard"
+		}
+	]
+}

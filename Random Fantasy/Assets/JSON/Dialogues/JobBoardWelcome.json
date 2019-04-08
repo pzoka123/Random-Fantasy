@@ -1,0 +1,12 @@
+{
+	"dialogue": [{
+			"name": "",
+			"sentences": []
+		}
+	],
+	"next": "JobBoard",
+	"nextAction": "event",
+	"scene": "JobBoard",
+	"items": [],
+	"stats": []
+}

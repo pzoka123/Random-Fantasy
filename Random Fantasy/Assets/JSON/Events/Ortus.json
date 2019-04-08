@@ -18,13 +18,13 @@
 			"next": "Forge",
 			"scene": "Forge"
 		}, {
-			"choiceName": "Adventurer Guild",
+			"choiceName": "Job Board",
 			"choiceDesc": [
-				"Let's see what the adventurer's guild. I may be able to register as an adventurer.",
-				"Otherwise, it's never a bad thing to do a few quests for some pocket change."
+				"Let's see if there are any quests to do.",
+				"It's never a bad thing to earn some money."
 			],
-			"next": "AdventurerGuild",
-			"scene": "Guild"
+			"next": "JobBoardWelcome",
+			"scene": "JobBoard"
 		}
 	]
 }
