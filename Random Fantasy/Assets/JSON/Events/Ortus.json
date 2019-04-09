@@ -15,7 +15,7 @@
 			"choiceDesc": [
 				"Let's pay the blacksmith a visit. It's never a bad thing to check out gears and equipment."
 			],
-			"next": "Forge",
+			"next": "ForgeWelcome",
 			"scene": "Forge"
 		}, {
 			"choiceName": "Adventurer Guild",

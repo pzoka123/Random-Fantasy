@@ -1,0 +1,16 @@
+{
+	"dialogue": [{
+			"name": "Blacksmith",
+			"sentences": [
+				"Hello, traveler. What brings you to my forge today?",
+				"Perhaps you want to purchase new equipment?",
+				"Or maybe you want to upgrade your current gears."
+			]
+		}
+	],
+	"next": "MagicStore",
+	"nextAction": "event",
+	"scene": "MagicStore",
+	"items": [],
+	"stats": []
+}
