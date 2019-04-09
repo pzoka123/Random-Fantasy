@@ -1,0 +1,19 @@
+{
+	"dialogue": [{
+			"name": "",
+			"sentences": [
+				"You encounter a cobblestone golem."
+			]
+		}, {
+			"name": "Cobblestone Golem",
+			"sentences": [
+				"Gggrrrh...."
+			]
+		}
+	],
+	"next": "GolemBattle",
+	"nextAction": "fight",
+	"scene": "StoneRuins",
+	"items": [ ],
+	"stats": [ ]
+}
