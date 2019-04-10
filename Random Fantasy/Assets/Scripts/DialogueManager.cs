@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     GameObject nameBox;
     GameObject dialogBox;
     bool runningText = false;
+    GameObject nextArrow;
 
     public string nextAction;
     public string nextEvent;
@@ -43,6 +44,7 @@ public class DialogueManager : MonoBehaviour
     {
         nameBox = GameObject.FindGameObjectWithTag("NameBox");
         dialogBox = GameObject.FindGameObjectWithTag("DialogBox");
+        nextArrow = GameObject.Find("NextArrow");
     }
 
     public void Display()
@@ -88,6 +90,7 @@ public class DialogueManager : MonoBehaviour
                     EventManager.eventManager.eventCard.GetComponent<Animator>().SetBool("isActive", false);
                     EventManager.eventManager.ShowChoice();
                     EventManager.eventManager.eventCard.GetComponent<Button>().enabled = true;
+                    EventManager.eventManager.backButton.SetActive(true);
                 }
                 else if (EventManager.eventManager.clicked == "choice")
                 {
@@ -125,9 +128,11 @@ public class DialogueManager : MonoBehaviour
                 StopAllCoroutines();
                 dialogBox.transform.GetChild(0).GetComponent<Text>().text = currentSentence;
                 runningText = false;
+                nextArrow.SetActive(true);
             }
             else
             {
+                nextArrow.SetActive(false);
                 currentSentence = sentences.Dequeue();
                 StopAllCoroutines();
                 StartCoroutine(TypeSentence(currentSentence));
@@ -144,6 +149,7 @@ public class DialogueManager : MonoBehaviour
             dialogBox.transform.GetChild(0).GetComponent<Text>().text += letter;
             yield return null;
         }
+        nextArrow.SetActive(true);
         runningText = false;
     }
 

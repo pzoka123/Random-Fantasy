@@ -145,6 +145,12 @@ public class GameLoop : MonoBehaviour
                 currentAction = Actions.dialogue;
                 break;
             }
+            else if (nextAction == Actions.fight)
+            {
+                gameState = CombatState();
+                currentAction = Actions.fight;
+                break;
+            }
             yield return null;
         }
     }
@@ -254,6 +260,10 @@ public class GameLoop : MonoBehaviour
         {
             nextAction = Actions.eventAction;
         }
+        else if (loadedDialogueData.nextAction == "fight")
+        {
+            nextAction = Actions.fight;
+        }
         nextScene = loadedDialogueData.scene;
 
         if (loadedDialogueData.items.Count > 0)
@@ -318,5 +328,10 @@ public class GameLoop : MonoBehaviour
         {
             EventManager.eventManager.choiceCards[i].GetComponentInChildren<Text>().text = choicesTemp[i].choiceName;
         }
+    }
+
+    void LoadCombat(string filename)
+    {
+
     }
 }

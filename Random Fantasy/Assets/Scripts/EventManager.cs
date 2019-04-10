@@ -15,6 +15,7 @@ public class EventManager : MonoBehaviour
     public GameObject eventBoard;
     public GameObject eventCard;
     public GameObject[] choiceCards;
+    public GameObject backButton;
 
     void Awake()
     {
@@ -34,6 +35,8 @@ public class EventManager : MonoBehaviour
         eventBoard = GameObject.FindGameObjectWithTag("EventBoard");
         eventCard = GameObject.FindGameObjectWithTag("EventCard");
         choiceCards = GameObject.FindGameObjectsWithTag("ChoiceCard");
+        backButton = GameObject.Find("BackButton");
+        backButton.SetActive(false);
     }
 
     public void Display()
@@ -41,11 +44,13 @@ public class EventManager : MonoBehaviour
         eventBoard.GetComponent<Animator>().SetBool("isActive", true);
         ShowEvent();
         ShowChoice();
+        backButton.SetActive(true);
     }
 
     public void Hide()
     {
         eventBoard.GetComponent<Animator>().SetBool("isActive", false);
+        backButton.SetActive(false);
     }
 
     public void ShowEvent()
@@ -102,6 +107,7 @@ public class EventManager : MonoBehaviour
     public void DisplayEvent()
     {
         eventCard.GetComponent<Animator>().SetBool("isActive", true);
+        backButton.SetActive(false);
         HideChoice();
         GameLoop.gameLoop.cardDisplay = true;
         clicked = "event";
@@ -120,6 +126,7 @@ public class EventManager : MonoBehaviour
     {
         currClicked = choice;
         choice.GetComponent<Animator>().SetBool("isActive", true);
+        backButton.SetActive(false);
         HideEvent();
         HideChoice();
         GameLoop.gameLoop.cardDisplay = true;
@@ -142,5 +149,17 @@ public class EventManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void BackToTown()
+    {
+        backButton.SetActive(false);
+        Hide();
+
+        GameLoop.gameLoop.nextFile = "Ortus";
+        GameLoop.gameLoop.currentFile = GameLoop.gameLoop.nextFile;
+        GameLoop.gameLoop.nextScene = "Ortus";
+        GameLoop.gameLoop.currentAction = GameLoop.Actions.standby;
+        GameLoop.gameLoop.transition = true;
     }
 }
