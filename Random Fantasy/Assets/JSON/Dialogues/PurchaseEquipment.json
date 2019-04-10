@@ -1,0 +1,24 @@
+{
+	"dialogue": [{
+			"dialogueName": "Blacksmith",
+			"sentences": [
+				"This seems like it would suit you perfectly."
+			]
+		}, {
+			"dialogueName": "",
+			"sentences": [
+				"[You have obtained Iron Sword]",
+				"With a new sword in hand, you feel much stronger than before."
+			]
+		}
+	],
+	"next": "Forge",
+	"nextAction": "event",
+	"scene": "Forge",
+	"items": ["Iron Sword"],
+	"stats": [{
+			"statsName": "Strength",
+			"value": "5"
+		}
+	]
+}

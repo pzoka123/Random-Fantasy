@@ -1,0 +1,25 @@
+{
+	"dialogue": [{
+			"dialogueName": "Blacksmith",
+			"sentences": [
+				"Go ahead. Show me what you got.",
+				"Don't think of smithing as child play."
+			]
+		}, {
+			"dialogueName": "",
+			"sentences": [
+				"[You have obtained Iron Armor.]",
+				"Your defense is greatly strengthened."
+			]
+		}
+	],
+	"next": "Forge",
+	"nextAction": "event",
+	"scene": "Forge",
+	"items": ["Iron Armor"],
+	"stats": [{
+			"statsName": "Defense",
+			"value": "5"
+		}
+	]
+}

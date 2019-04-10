@@ -255,6 +255,29 @@ public class GameLoop : MonoBehaviour
             nextAction = Actions.eventAction;
         }
         nextScene = loadedDialogueData.scene;
+
+        if (loadedDialogueData.items.Count > 0)
+        {
+            foreach (string item in loadedDialogueData.items)
+            {
+                Player.inventory.Add(item);
+            }
+        }
+
+        if (loadedDialogueData.stats.Count > 0)
+        {
+            foreach (StatsData stats in loadedDialogueData.stats)
+            {
+                if (Player.stats.ContainsKey(stats.statsName))
+                {
+                    Player.stats[stats.statsName] += stats.value;
+                }
+                else
+                {
+                    Player.stats.Add(stats.statsName, stats.value);
+                }
+            }
+        }
     }
 
     void LoadEvent(string fileName)

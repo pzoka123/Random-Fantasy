@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
-    public List<ItemData> inventory;
-    public List<StatsData> stats;
+    public List<string> inventory;
+    public Dictionary<string, int> stats;
 
     public PlayerData()
     {

@@ -1,6 +1,6 @@
 {
 	"dialogue": [{
-			"name": "Store Keeper",
+			"dialogueName": "Store Keeper",
 			"sentences": [
 				"Welcome, welcome. What can I get for you today?",
 				"Are you looking for a spell book? We have plenty on our shelves.",

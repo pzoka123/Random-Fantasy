@@ -1,0 +1,24 @@
+{
+	"dialogue": [{
+			"dialogueName": "Blacksmith",
+			"sentences": [
+				"Very well. I shall give you smithing training.",
+				"Put in efforts and you will get better in no time."
+			]
+		}, {
+			"dialogueName": "",
+			"sentences": [
+				"You spend your time training and slowly get better at smithing."
+			]
+		}
+	],
+	"next": "Forge",
+	"nextAction": "event",
+	"scene": "Forge",
+	"items": [],
+	"stats": [{
+			"statsName": "Smithing",
+			"value": "5"
+		}
+	]
+}

@@ -1,26 +1,22 @@
 {
 	"dialogue": [{
-			"name": "Store Keeper",
+			"dialogueName": "Store Keeper",
 			"sentences": [
 				"I do, indeed. Here I present to you the Tome of Knowledge.",
 				"I am sure your magic ability will increase drastically."
 			]
 		}, {
-			"name": "",
+			"dialogueName": "",
 			"sentences": [
 				"[You have obtained the Tome of Knowledge.]",
 				"You feel like you have become smarter and your magic is more powerful."
 			]
 		}
 	],
-	"next": "MagicStoreWelcome",
-	"nextAction": "dialogue",
+	"next": "MagicStore",
+	"nextAction": "event",
 	"scene": "MagicStore",
-	"items": [{
-			"itemName": "Tome of Knowledge",
-			"count": "1"
-		}
-	],
+	"items": ["Tome of Knowledge"],
 	"stats": [{
 			"statsName": "Knowledge",
 			"value": "5"

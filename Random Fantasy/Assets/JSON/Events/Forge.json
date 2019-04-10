@@ -1,0 +1,30 @@
+{
+	"eventName": "Forge",
+	"eventDesc": [
+		"What are you going to do at the Forge?"
+	],
+	"choices": [{
+			"choiceName": "Purchase Equipment",
+			"choiceDesc": [
+				"You have any weapons or armor I can use?"
+			],
+			"next": "PurchaseEquipment",
+			"scene": "Forge"
+		}, {
+			"choiceName": "Forge New Equipment",
+			"choiceDesc": [
+				"I'd like to use the workshop for a while. I'll do the smithing myself."
+			],
+			"next": "ForgeEquipment",
+			"scene": "Forge"
+		}, {
+			"choiceName": "Train Smithing",
+			"choiceDesc": [
+				"I'd like to train my smithing skill.",
+				"Please teach me."
+			],
+			"next": "TrainSmithing",
+			"scene": "Forge"
+		}
+	]
+}

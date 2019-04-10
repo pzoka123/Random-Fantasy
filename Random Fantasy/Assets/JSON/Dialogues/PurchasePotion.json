@@ -1,25 +1,21 @@
 {
 	"dialogue": [{
-			"name": "Store Keeper",
+			"dialogueName": "Store Keeper",
 			"sentences": [
 				"I have plenty of potions in store. Perhaps this potion of vigor is the one you are looking for."
 			]
 		}, {
-			"name": "",
+			"dialogueName": "",
 			"sentences": [
 				"[You have obtained the Potion of Vigor.]",
 				"After drinking, you feel a wave of power rushing inside your body. Your strength and physical power has improved."
 			]
 		}
 	],
-	"next": "MagicStoreWelcome",
-	"nextAction": "dialogue",
+	"next": "MagicStore",
+	"nextAction": "event",
 	"scene": "MagicStore",
-	"items": [{
-			"itemName": "Potion of Vigor",
-			"count": "1"
-		}
-	],
+	"items": ["Potion of Vigor"],
 	"stats": [{
 			"statsName": "Strength",
 			"value": "5"

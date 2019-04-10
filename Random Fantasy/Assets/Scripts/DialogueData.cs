@@ -9,6 +9,6 @@ public class DialogueData
     public string next;
     public string nextAction;
     public string scene;
-    public List<ItemData> items;
+    public List<string> items;
     public List<StatsData> stats;
 }
