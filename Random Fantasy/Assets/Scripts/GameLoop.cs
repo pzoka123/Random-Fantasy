@@ -41,14 +41,10 @@ public class GameLoop : MonoBehaviour
     public bool isDead = false;
     public bool endScene = false;
 
-    public bool isEvent = false;
-    public bool isDialogue = false;
-    public bool isAction = false;
-    public bool isCombat = false;
-    public bool isEnd = false;
-
     public string victoryText;
     public string defeatText;
+    List<string> loot;
+    List<StatsData> exp;
 
     void Awake()
     {
@@ -216,13 +212,25 @@ public class GameLoop : MonoBehaviour
                 CombatManager.combatManager.Combat();
                 DiceBoardManager.diceBoardManager.rolled = false;
             }
+            
+            if (CombatManager.combatManager.playerDefeat)
+            {
+                gameState = EndState();
+                break;
+            }
+            else if (CombatManager.combatManager.playerWin)
+            {
+                gameState = StandbyState();
+                nextAction = Actions.dialogue;
+                break;
+            }
             yield return null;
         }
     }
 
     public IEnumerable EndState()
     {
-        while (isEnd)
+        while (true)
         {
             Debug.Log("END");
             FadeOut();
@@ -338,8 +346,11 @@ public class GameLoop : MonoBehaviour
         }
     }
 
-    void LoadCombat(string filename)
+    void LoadCombat(string fileName)
     {
-
+        string combatJson = File.ReadAllText(Application.dataPath + "/JSON/Combats/" + fileName + ".json");
+        CombatData loadedCombatData = JsonUtility.FromJson<CombatData>(combatJson);
+        victoryText = loadedCombatData.victory;
+        defeatText = loadedCombatData.defeat;
     }
 }

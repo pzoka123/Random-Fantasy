@@ -38,10 +38,6 @@ public class Character : MonoBehaviour
     {
         anim.SetBool("die", true);
         die = true;
-        if (gameObject.tag == "Player")
-        {
-            GameLoop.gameLoop.isEnd = true;
-        }
     }
 
     public void EndAttack()

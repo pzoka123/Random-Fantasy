@@ -1,11 +1,11 @@
 {
 	"dialogue": [{
-			"name": "",
+			"dialogueName": "",
 			"sentences": [
 				"You encounter a cobblestone golem."
 			]
 		}, {
-			"name": "Cobblestone Golem",
+			"dialogueName": "Cobblestone Golem",
 			"sentences": [
 				"Gggrrrh...."
 			]

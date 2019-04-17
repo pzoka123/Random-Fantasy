@@ -8,7 +8,7 @@ public class DiceBoardManager : MonoBehaviour
     public static DiceBoardManager diceBoardManager { get; set; }
 
     GameObject diceBoard;
-    GameObject rollButton;
+    public GameObject rollButton;
     GameObject[] dice;
 
     public Sprite[] diceSprites;
