@@ -11,7 +11,7 @@
 			]
 		}
 	],
-	"next": "GolemBattle",
+	"next": "",
 	"nextAction": "fight",
 	"scene": "StoneRuins",
 	"items": [ ],
