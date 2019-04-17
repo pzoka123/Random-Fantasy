@@ -207,9 +207,17 @@ public class GameLoop : MonoBehaviour
 
     public IEnumerable CombatState()
     {
-        DiceBoardManager.diceBoardManager.Setup();
         DiceBoardManager.diceBoardManager.Display();
-        yield return null;
+        while (true)
+        {
+            if (DiceBoardManager.diceBoardManager.rolled)
+            {
+                DiceBoardManager.diceBoardManager.Result();
+                CombatManager.combatManager.Combat();
+                DiceBoardManager.diceBoardManager.rolled = false;
+            }
+            yield return null;
+        }
     }
 
     public IEnumerable EndState()

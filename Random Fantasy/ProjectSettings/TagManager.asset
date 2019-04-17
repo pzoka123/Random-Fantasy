@@ -13,15 +13,13 @@ TagManager:
   - DialogBox
   - ChoiceCard
   - DiceBoard
-  - RollText
   - RollButton
   - EventBoard
-  - Positions
   - OtherChar
   - Scene
-  - NextArrow
   - StatsBoard
   - StatsButton
+  - Dice
   layers:
   - Default
   - TransparentFX

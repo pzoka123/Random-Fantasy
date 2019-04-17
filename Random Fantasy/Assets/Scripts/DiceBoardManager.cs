@@ -8,19 +8,13 @@ public class DiceBoardManager : MonoBehaviour
     public static DiceBoardManager diceBoardManager { get; set; }
 
     GameObject diceBoard;
-    GameObject rollText;
     GameObject rollButton;
+    GameObject[] dice;
+
     public Sprite[] diceSprites;
+    public bool rolled = false;
 
-    int rollNum;
-    public bool canAtk = false;
-    public bool canDie = false;
-    public bool canAtk2 = false;
-    public bool canDie2 = false;
-    public int endFight = 0;
-
-    public int dice = 2;
-    GameObject[] activeDice;
+    GameObject player;
 
     void Awake()
     {
@@ -38,59 +32,67 @@ public class DiceBoardManager : MonoBehaviour
     void Start()
     {
         diceBoard = GameObject.FindGameObjectWithTag("DiceBoard");
-        rollText = GameObject.FindGameObjectWithTag("RollText");
         rollButton = GameObject.FindGameObjectWithTag("RollButton");
+        dice = GameObject.FindGameObjectsWithTag("Dice");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void Display()
     {
-        rollText.SetActive(false);
         rollButton.SetActive(true);
         diceBoard.GetComponent<Animator>().SetBool("isActive", true);
     }
 
     public void Hide()
     {
-        rollText.SetActive(false);
         rollButton.SetActive(true);
         diceBoard.GetComponent<Animator>().SetBool("isActive", false);
     }
 
     public void Roll()
     {
-        rollNum = 0;
-        foreach (GameObject die in activeDice)
+        rollButton.SetActive(false);
+        foreach (GameObject die in dice)
         {
-            int rnd = Random.Range(1, 7);
-            rollNum += rnd;
-            die.GetComponent<Image>().sprite = diceSprites[rnd - 1];
+            die.GetComponent<Image>().overrideSprite = null;
+            die.GetComponent<Animator>().SetBool("roll", true);
         }
-        Result();
+
     }
 
     public void Result()
     {
-        string isHit;
-        if (rollNum <= 7)
-        {
-            isHit = "The opponent gets the upper hand and strikes you first.";
-        }
-        else
-        {
-            isHit = "You get to strike first.";
-        }
-        rollText.GetComponent<Text>().text = rollNum.ToString() + ". " + isHit;
-        rollText.SetActive(true);
-        rollButton.SetActive(false);
-    }
+        int attack = 0;
+        int defend = 0;
+        int magic = 0;
 
-    public void Setup()
-    {
-        activeDice = new GameObject[dice];
-        for (int i = 0; i < dice; i++)
+        foreach (GameObject die in dice)
         {
-            diceBoard.transform.GetChild(i).gameObject.SetActive(true);
-            activeDice[i] = diceBoard.transform.GetChild(i).gameObject;
+            if (die.GetComponent<Image>().overrideSprite.name == "SwordDice")
+            {
+                attack++;
+            }
+            else if (die.GetComponent<Image>().overrideSprite.name == "ShieldDice")
+            {
+                defend++;
+            }
+            else if (die.GetComponent<Image>().overrideSprite.name == "StarDice")
+            {
+                magic++;
+            }
+        }
+
+        if (attack >= 3)
+        {
+            player.GetComponent<Character>().CharAttack();
+        }
+        else if (defend >= 3)
+        {
+            player.GetComponent<Character>().CharDefend();
+        }
+        else if (magic >= 3)
+        {
+            player.GetComponent<Character>().CharMagic();
         }
     }
 }
